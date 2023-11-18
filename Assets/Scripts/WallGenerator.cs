@@ -8,7 +8,7 @@ public static class WallGenerator
     public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
     {
         HashSet<Vector2Int> wallPositions = FindWallsHex(floorPositions);
-        tilemapVisualizer.PaintWallTiles(wallPositions);
+        tilemapVisualizer.CreateWalls(wallPositions);
     }
 
     private static HashSet<Vector2Int> FindWallsHex(HashSet<Vector2Int> floorPositions)
@@ -23,7 +23,7 @@ public static class WallGenerator
                 if (!floorPositions.Contains(neighborPosition))
                 {
                     wallPositions.Add(neighborPosition);
-                    Debug.Log("Wall in " + neighborPosition);
+                    //Debug.Log("Wall in " + neighborPosition);
                 }
             }
         }

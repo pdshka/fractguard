@@ -22,25 +22,25 @@ public class FloorGenerator : MonoBehaviour
     
     public void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        HashSet<Vector2Int> newFloorPositions = RunRandomWalk();
         tilemapVisualizer.Clear();
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        tilemapVisualizer.PaintFloorTiles(newFloorPositions);
+        WallGenerator.CreateWalls(newFloorPositions, tilemapVisualizer);
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
     {
         Vector2Int currentPosition = startPosition;
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> newFloorPositions = new HashSet<Vector2Int>();
         for (int i = 0; i < iterations; i++)
         {
             HashSet<Vector2Int> path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, walkLength);
-            floorPositions.UnionWith(path);
+            newFloorPositions.UnionWith(path);
             if (startRandomlyEachIteration)
             {
-                currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
+                currentPosition = newFloorPositions.ElementAt(Random.Range(0, newFloorPositions.Count));
             }
         }
-        return floorPositions;
+        return newFloorPositions;
     }
 }

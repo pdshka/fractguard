@@ -826,9 +826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 54915854}
-  wallTilemap: {fileID: 960723364}
   floorTile: {fileID: 11400000, guid: 057be9a0ad765b84ea99694a3f6b068d, type: 2}
-  wallTile: {fileID: 11400000, guid: 9152745b329d5f144aae1d7d299184d2, type: 2}
+  wallObject: {fileID: 5899742003926088334, guid: e25eb41d7aae7b64c99e318a9f7525f8, type: 3}
 --- !u!4 &982132085
 Transform:
   m_ObjectHideFlags: 0
