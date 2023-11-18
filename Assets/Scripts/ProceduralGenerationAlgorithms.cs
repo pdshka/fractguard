@@ -13,7 +13,7 @@ public static class ProceduralGenerationAlgorithms
         for (int i = 0; i < walkLenght; i++)
         {
             Vector2Int nextPosition = previousPosition + DirectionHex.GetRandomCardinalDirection(previousPosition);
-            Debug.Log(nextPosition);
+            //Debug.Log("Walked to " + nextPosition);
             path.Add(nextPosition);
             previousPosition = nextPosition;
         }

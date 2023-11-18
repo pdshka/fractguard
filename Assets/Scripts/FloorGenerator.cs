@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WallsGenerator : MonoBehaviour
+public class FloorGenerator : MonoBehaviour
 {
     [SerializeField]
     protected Vector2Int startPosition = Vector2Int.zero;
@@ -25,6 +25,7 @@ public class WallsGenerator : MonoBehaviour
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
+        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
