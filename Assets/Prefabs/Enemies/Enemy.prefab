@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: -6028333819084052839}
   - component: {fileID: 3010285699464445199}
   - component: {fileID: 1544045536}
+  - component: {fileID: 1544045537}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
@@ -206,11 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b5e0aa51c982f43b64d0f698107540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCheck: {fileID: 81753043}
-  attackCheckRadius: 0.2
   awardForDefeating: 0
   healthEvent: {fileID: 0}
   enemyMovementAI: {fileID: 0}
+  enemyAttackAI: {fileID: 0}
   rigidBody2D: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &-6393621387196747361
@@ -295,6 +295,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.004544646, y: -0.75019187}
   m_Size: {x: 2.8545103, y: 1.4996399}
   m_Direction: 1
+--- !u!114 &1544045537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626202682854364539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faae428f2e7d88744bb47e74bcca6897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCheck: {fileID: 81753043}
+  attackCheckRadius: 0.2
+  enemyDamage: 5
 --- !u!1001 &1206899825849272596
 PrefabInstance:
   m_ObjectHideFlags: 0
