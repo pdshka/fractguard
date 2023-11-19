@@ -14,6 +14,8 @@ public class TilemapVisualizer : MonoBehaviour
     private Tilemap wallTilemap;
     [SerializeField]
     private GameObject wallObject;
+    [SerializeField]
+    private GameObject wallsContainer;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -26,7 +28,7 @@ public class TilemapVisualizer : MonoBehaviour
         {
             GameObject newWall = GameObject.Instantiate(wallObject);
             newWall.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
-            newWall.transform.SetParent(this.gameObject.transform);
+            newWall.transform.SetParent(wallsContainer.transform);
         }
     }
 
@@ -81,5 +83,24 @@ public class TilemapVisualizer : MonoBehaviour
     public HashSet<Vector2Int> GetWallPositions()
     {
         return GetTilePositions(wallTilemap);
+    }
+
+    public Vector2Int GetSymmetricPosition(Vector2Int position)
+    {
+        var worldPosition = floorTilemap.CellToWorld((Vector3Int)position);
+        worldPosition *= -1;
+        return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
+    }
+    public Vector2Int GetSymmetricPositionHorizontal(Vector2Int position)
+    {
+        var worldPosition = floorTilemap.CellToWorld((Vector3Int)position);
+        worldPosition *= new Vector2(-1, 1);
+        return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
+    }
+    public Vector2Int GetSymmetricPositionVertical(Vector2Int position)
+    {
+        var worldPosition = floorTilemap.CellToWorld((Vector3Int)position);
+        worldPosition *= new Vector2(1, -1);
+        return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
     }
 }

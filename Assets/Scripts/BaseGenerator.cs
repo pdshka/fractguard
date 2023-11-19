@@ -13,14 +13,17 @@ public class BaseGenerator : MonoBehaviour
     private Vector2Int startPosition;
 
     [SerializeField]
-    private int iterations = 10;
+    private int iterations = 5;
     [SerializeField]
-    private int walkLength = 10;
+    private int walkLength = 5;
     [SerializeField]
     private bool startRandomlyEachIteration = true;
 
     [SerializeField]
     private TilemapVisualizer tilemapVisualizer;
+
+    [SerializeField]
+    private bool fourSymmetricAreas = false;
 
     private void Start()
     {
@@ -39,7 +42,7 @@ public class BaseGenerator : MonoBehaviour
                 var neighborPosition = startPosition + direction;
                 if (!floorPositions.Contains(neighborPosition) && !wallPositions.Contains(neighborPosition))
                 {
-                    return startPosition;
+                    return neighborPosition;
                 }
             }
         }
@@ -60,6 +63,7 @@ public class BaseGenerator : MonoBehaviour
 
     private HashSet<Vector2Int> RunRandomWalk()
     {
+        //Debug.Log("Start Position: " + startPosition);
         Vector2Int currentPosition = startPosition;
         HashSet<Vector2Int> newFloorPositions = new HashSet<Vector2Int>();
         for (int i = 0; i < iterations; i++)
@@ -70,11 +74,19 @@ public class BaseGenerator : MonoBehaviour
                 if(!floorPositions.Contains(position) && !wallPositions.Contains(position))
                 {
                     newFloorPositions.Add(position);
+                    newFloorPositions.Add(tilemapVisualizer.GetSymmetricPosition(position));
+                    if (fourSymmetricAreas)
+                    {
+                        newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionHorizontal(position));
+                        newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionVertical(position));
+                    }
                 }
             }
             if (startRandomlyEachIteration)
             {
-                currentPosition = newFloorPositions.ElementAt(Random.Range(0, newFloorPositions.Count));
+                var index = Random.Range(0, newFloorPositions.Count);
+                //Debug.Log("index = " + index);
+                currentPosition = newFloorPositions.ElementAt(index);
             }
         }
         return newFloorPositions;
