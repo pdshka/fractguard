@@ -23,7 +23,9 @@ public class BaseGenerator : MonoBehaviour
     private TilemapVisualizer tilemapVisualizer;
 
     [SerializeField]
-    private bool fourSymmetricAreas = false;
+    private bool symmetry = true;
+    [SerializeField]
+    private bool symmetryFourSides = false;
 
     private void Start()
     {
@@ -74,11 +76,14 @@ public class BaseGenerator : MonoBehaviour
                 if(!floorPositions.Contains(position) && !wallPositions.Contains(position))
                 {
                     newFloorPositions.Add(position);
-                    newFloorPositions.Add(tilemapVisualizer.GetSymmetricPosition(position));
-                    if (fourSymmetricAreas)
+                    if (symmetry)
                     {
-                        newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionHorizontal(position));
-                        newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionVertical(position));
+                        newFloorPositions.Add(tilemapVisualizer.GetSymmetricPosition(position));
+                        if (symmetryFourSides)
+                        {
+                            newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionHorizontal(position));
+                            newFloorPositions.Add(tilemapVisualizer.GetSymmetricPositionVertical(position));
+                        }
                     }
                 }
             }

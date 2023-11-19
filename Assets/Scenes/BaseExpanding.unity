@@ -462,7 +462,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Expand
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1010,55 +1010,6 @@ Transform:
   m_Father: {fileID: 1788215900}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &982132083
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 982132085}
-  - component: {fileID: 982132084}
-  m_Layer: 0
-  m_Name: TilemapVisualizer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &982132084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982132083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d461794d9b116e4eab1e7134e8554b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floorTilemap: {fileID: 54915854}
-  floorTile: {fileID: 11400000, guid: 057be9a0ad765b84ea99694a3f6b068d, type: 2}
-  wallTilemap: {fileID: 960723364}
-  wallObject: {fileID: 5899742003926088334, guid: e25eb41d7aae7b64c99e318a9f7525f8, type: 3}
-  wallsContainer: {fileID: 1381902499}
---- !u!4 &982132085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982132083}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2028955648}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381902499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,53 +1221,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2028955646
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2028955648}
-  - component: {fileID: 2028955647}
-  m_Layer: 0
-  m_Name: FloorGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2028955647
+--- !u!114 &2028955647 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3561582963778574974, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+  m_PrefabInstance: {fileID: 3561582962584960385}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028955646}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09411fe8b2297d24b8df86e6e8a37925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 5
-  walkLength: 5
-  startRandomlyEachIteration: 1
-  tilemapVisualizer: {fileID: 982132084}
-  fourSymmetricAreas: 0
---- !u!4 &2028955648
-Transform:
+--- !u!1001 &3561582962584960385
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028955646}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 982132085}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3561582962677881077, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: wallTilemap
+      value: 
+      objectReference: {fileID: 960723364}
+    - target: {fileID: 3561582962677881077, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: floorTilemap
+      value: 
+      objectReference: {fileID: 54915854}
+    - target: {fileID: 3561582962677881077, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: wallsContainer
+      value: 
+      objectReference: {fileID: 1381902499}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778573697, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778574974, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: fourSymmetricAreas
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561582963778574975, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
+      propertyPath: m_Name
+      value: FloorGenerator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3645a79e7b09a5840b243b42310f7aea, type: 3}
