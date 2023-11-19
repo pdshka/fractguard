@@ -8,7 +8,7 @@ public class EnemyMovementAI : MonoBehaviour
 {
     public float moveSpeed = 8f;
     private Enemy enemy;
-
+    private readonly Vector3 initialTargetPosition = Vector3.zero;
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
@@ -16,21 +16,32 @@ public class EnemyMovementAI : MonoBehaviour
 
     private void Update()
     {
-        MoveEnemy();
+        MoveEnemy(initialTargetPosition);
     }
 
     /// <summary>
     /// Handle enemy movement, while enemy is alive
     /// </summary>
-    private void MoveEnemy()
+    private void MoveEnemy(Vector3 movePosition)
     {
         // Бежим в сторону главной башни
 
-        /*Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
+        if (Vector3.Distance(transform.position, movePosition) < 0.2f)
+        {
+            // Idle();
+            return;
+        }
+
+        Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
 
         enemy.rigidBody2D.MovePosition(enemy.rigidBody2D.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
 
-        // передаем инфу аниматору и другим ... */
+        // передаем инфу аниматору и другим ... 
 
+    }
+
+    private void Idle()
+    {
+        // сигнал аниматору
     }
 }

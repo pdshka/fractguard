@@ -5,6 +5,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Health : MonoBehaviour
 {
+    #region Header References
+    [Space(10)]
+    [Header("References")]
+    #endregion
+    #region Tooltip
+    [Tooltip("Populate with the HealthBar component on the HealthBar gameobject")]
+    #endregion
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private int initialHealth;
     [HideInInspector] public int currentHealth;
     [HideInInspector] public HealthEvent healthEvent;
@@ -25,6 +33,8 @@ public class Health : MonoBehaviour
 
     protected virtual void Start()
     {
+        currentHealth = initialHealth;
+        
         // Trigger a health event for UI update
         CallHealthEvent(0);
     }
@@ -43,6 +53,12 @@ public class Health : MonoBehaviour
 
             currentHealth -= damageAmount;
             CallHealthEvent(damageAmount);
+
+            // Set health bar as the percentage of health remaining
+            if (healthBar != null)
+            {
+                healthBar.SetHealthBarValue((float)currentHealth / (float)initialHealth);
+            }
 
             if (hasHitEffect)
                 PostHitEffect();

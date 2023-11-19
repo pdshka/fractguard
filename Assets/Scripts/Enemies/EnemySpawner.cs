@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
+    // [SerializeField] private List<>
+
     private int currentEnemyCount;
     private int enemiesSpawnedSoFar;
 
