@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 
 public class BaseGenerator : MonoBehaviour
 {
-    private HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-    private HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>() { new Vector2Int(0,0) };
+    private HashSet<Vector2Int> floorPositions;
+    private HashSet<Vector2Int> wallPositions;
 
     private Vector2Int startPosition;
 
@@ -21,6 +21,12 @@ public class BaseGenerator : MonoBehaviour
 
     [SerializeField]
     private TilemapVisualizer tilemapVisualizer;
+
+    private void Start()
+    {
+        floorPositions = tilemapVisualizer.GetFloorTilePositions();
+        wallPositions = tilemapVisualizer.GetWallPositions();
+    }
 
     public Vector2Int GetRandomStartPosition()
     {
