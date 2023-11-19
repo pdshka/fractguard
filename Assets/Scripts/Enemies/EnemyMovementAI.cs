@@ -29,6 +29,7 @@ public class EnemyMovementAI : MonoBehaviour
         if (Vector3.Distance(transform.position, movePosition) < 0.2f)
         {
             // Idle();
+            // play attack animation
             return;
         }
 

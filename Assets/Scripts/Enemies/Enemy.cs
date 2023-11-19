@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public HealthEvent healthEvent;
     private Health health;
     [HideInInspector] public EnemyMovementAI enemyMovementAI;
+    [HideInInspector] public EnemyAttackAI enemyAttackAI;
     [HideInInspector] public Rigidbody2D rigidBody2D;
     private BoxCollider2D boxCollider2D;
     private PolygonCollider2D polygonCollider2D;
@@ -82,5 +83,4 @@ public class Enemy : MonoBehaviour
         // Set animator speed to match movement speed
         // animator.speed = enemyMovementAI.moveSpeed / Settings.baseSpeedForEnemyAnimations;
     }
-
 }
