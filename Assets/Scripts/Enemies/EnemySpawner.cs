@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
-    [SerializeField] private List<ArmyPatternSO> armyPatterns = new List<ArmyPatternSO>();
+    [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
     [SerializeField] private GameObject enemyPrefab;
 
     private int currentEnemyCount;
@@ -14,7 +14,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         LaunchNextWave();
     }
 
-    private ArmyPatternSO ChooseRandomFractalPattern()
+    private GameObject ChooseRandomFractalPattern()
     {
         int index = Random.Range(0, armyPatterns.Count - 1);
 
@@ -23,11 +23,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void LaunchNextWave()
     {
-        ArmyPatternSO armyPattern = ChooseRandomFractalPattern();
-        foreach (var position in armyPattern.positions)
-        {
-            CreateEnemy(enemyPrefab, position);
-        }
+        GameObject armyPattern = ChooseRandomFractalPattern();
+        Instantiate(armyPattern);
         // currentEnemyCount += ...
     }
 
