@@ -16,6 +16,8 @@ public class TilemapVisualizer : MonoBehaviour
     private GameObject wallObject;
     [SerializeField]
     private GameObject wallsContainer;
+    [SerializeField]
+    private GameObject buildingsContainer;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -28,8 +30,17 @@ public class TilemapVisualizer : MonoBehaviour
         {
             GameObject newWall = GameObject.Instantiate(wallObject);
             newWall.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
-            newWall.transform.SetParent(wallsContainer.transform);
+            if (wallsContainer != null)
+                newWall.transform.SetParent(wallsContainer.transform);
         }
+    }
+
+    public void CreateBuilding(GameObject building, Vector2Int position)
+    {
+        GameObject newBuilding = Instantiate(building);
+        newBuilding.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
+        if (buildingsContainer != null)
+            newBuilding.transform.SetParent(buildingsContainer.transform);
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
@@ -91,16 +102,28 @@ public class TilemapVisualizer : MonoBehaviour
         worldPosition *= -1;
         return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
     }
+
     public Vector2Int GetSymmetricPositionHorizontal(Vector2Int position)
     {
         var worldPosition = floorTilemap.CellToWorld((Vector3Int)position);
         worldPosition *= new Vector2(-1, 1);
         return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
     }
+
     public Vector2Int GetSymmetricPositionVertical(Vector2Int position)
     {
         var worldPosition = floorTilemap.CellToWorld((Vector3Int)position);
         worldPosition *= new Vector2(1, -1);
         return (Vector2Int)floorTilemap.WorldToCell(worldPosition);
+    }
+
+    public Vector3Int WorldToCell(Vector3 position)
+    {
+        return floorTilemap.WorldToCell(position);
+    }
+
+    public Vector3 CellToWorld(Vector3Int position)
+    {
+        return floorTilemap.CellToWorld(position);
     }
 }
