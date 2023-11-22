@@ -1,55 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 
-public abstract class Tower : MonoBehaviour
+public class Tower : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private float cooldown;
-    private Enemy target;
+    [SerializeField] private GameObject target;
     private float timer;
     private float offset;
 
-    private Queue<Enemy> enemyQueue;
+    private Queue<GameObject> enemyQueue;
 
     private void Start()
     {
         timer = 0f;
         target = null;
-        enemyQueue = new Queue<Enemy>();
+        enemyQueue = new Queue<GameObject>();
     }
 
     private void Update()
     {
         if (timer > 0f)
             timer -= Time.deltaTime;
-        if (enemyQueue.Count > 0)
+        if (target != null)
             Shoot();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
-            enemyQueue.Enqueue(collision.gameObject.GetComponent<Enemy>());
+        {
+            if (enemyQueue.Count == 0)
+                target = collision.gameObject;
+            else
+                enemyQueue.Enqueue(collision.gameObject);
+        }
     }
 
     private void Aim()
     {
         float distX = target.transform.position.x - transform.position.x;
         float distY = target.transform.position.y - transform.position.y;
-        transform.rotation = new Quaternion(0, 0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg); // Проверить, напистаь без оффсета
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg); // Проверить, написать без оффсета
+        Debug.Log(distX + " " + distY + " " + transform.rotation.z + " " + Mathf.Atan2(distY, distX) * Mathf.Rad2Deg);
     }
 
     private void Shoot()
     {
-        Aim();
-        if (target = null)
+        if (target == null && enemyQueue.Count > 0)
             target = enemyQueue.Dequeue();
+        if (target != null) Aim();
         if (timer == 0f)
         {
-            Quaternion rotation = transform.rotation;
-            Instantiate(bulletPrefab, transform.position, rotation);
+            //Instantiate(bulletPrefab, transform.position, transform.rotation);
             timer = cooldown;
         }
     }
