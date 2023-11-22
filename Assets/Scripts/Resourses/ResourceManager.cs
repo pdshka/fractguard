@@ -21,11 +21,15 @@ public class ResourceManager : MonoBehaviour
         resources["stone"] = 0;
     }
 
-
     private void Update()
     {
         moneyAmount.text = resources["money"].ToString();
         woodAmount.text = resources["wood"].ToString();
         stoneAmount.text = resources["stone"].ToString();
+    }
+
+    public void IncreaseResources(string resourceName, int amount)
+    {
+        resources[resourceName] += amount;
     }
 }
