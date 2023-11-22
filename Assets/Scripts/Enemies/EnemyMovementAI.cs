@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 [RequireComponent(typeof(Enemy))]
 [DisallowMultipleComponent]
@@ -33,12 +34,56 @@ public class EnemyMovementAI : MonoBehaviour
             return;
         }
 
+
+        Vector3 moveDirection = (movePosition - transform.position).normalized;
         Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
 
         enemy.rigidBody2D.MovePosition(enemy.rigidBody2D.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
 
         // передаем инфу аниматору и другим ... 
+        InitializeLookAnimationParameters();
+        
+        float moveAngle = HelperUtilities.GetAngleFromVector(moveDirection);
+        LookDirection lookDirection = HelperUtilities.GetLookDirection(moveAngle);
+        SetLookAnimationParameters(lookDirection);
+    }
 
+    /// <summary>
+    /// Initialise look animation parameters
+    /// </summary>
+    private void InitializeLookAnimationParameters()
+    {
+        enemy.animator.SetBool("lookUp", false);
+        enemy.animator.SetBool("lookRight", false);
+        enemy.animator.SetBool("lookLeft", false);
+        enemy.animator.SetBool("lookDown", false);
+    }
+
+    /// <summary>
+    /// Set look animation parameters
+    /// </summary>
+    private void SetLookAnimationParameters(LookDirection lookDirection)
+    {
+        // Set look direction
+        switch (lookDirection)
+        {
+            case LookDirection.Up:
+                enemy.animator.SetBool("lookUp", true);
+                break;
+
+            case LookDirection.Right:
+                enemy.animator.SetBool("lookRight", true);
+                break;
+
+            case LookDirection.Left:
+                enemy.animator.SetBool("lookLeft", true);
+                break;
+
+            case LookDirection.Down:
+                enemy.animator.SetBool("lookDown", true);
+                break;
+
+        }
     }
 
     private void Idle()
