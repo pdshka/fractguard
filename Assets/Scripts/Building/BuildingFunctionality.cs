@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BuildingFunctionality : MonoBehaviour
 {
-    [SerializeField]
-    private Building building;
+    public Building building;
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     private ResourceManager resourceManager;

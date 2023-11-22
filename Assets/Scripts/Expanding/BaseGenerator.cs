@@ -115,4 +115,19 @@ public class BaseGenerator : MonoBehaviour
         }
         return newWallPositions;
     }
+
+    public void CreateBuilding(GameObject building, Vector2Int position)
+    {
+        tilemapVisualizer.CreateBuilding(building, position);
+    }
+
+    public Vector3Int WorldToCell(Vector3 position)
+    {
+        return tilemapVisualizer.WorldToCell(position);
+    }
+
+    public Vector3 CellToWorld(Vector3Int position)
+    {
+        return tilemapVisualizer.CellToWorld(position);
+    }
 }
