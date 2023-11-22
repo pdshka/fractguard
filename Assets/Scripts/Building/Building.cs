@@ -9,4 +9,5 @@ public class Building : ScriptableObject
     public Resource resource;
     public int resourceIncrease;
     public float timeBetweenIncreases;
+    public int cost;
 }

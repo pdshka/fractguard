@@ -16,3 +16,4 @@ MonoBehaviour:
   resource: {fileID: 11400000, guid: 61f804a27d8be804fb55e6dcd13bcfcc, type: 2}
   resourceIncrease: 1
   timeBetweenIncreases: 5
+  cost: 5

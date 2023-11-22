@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 
 public class BaseGenerator : MonoBehaviour
 {
-    private HashSet<Vector2Int> floorPositions;
-    private HashSet<Vector2Int> wallPositions;
+    public HashSet<Vector2Int> floorPositions;
+    public HashSet<Vector2Int> wallPositions;
 
     private Vector2Int startPosition;
 
