@@ -7,21 +7,29 @@ public class Bullet : MonoBehaviour
     private Vector3 direction;
     [SerializeField] private float velocity;
     [SerializeField] private float damage;
+    private float timer;
 
-    void Start()
+    private void Start()
     {
-        // TODO: расчет направления полета пули (нормированный ветор)
+        timer = 10f;
     }
 
-    void Update()
+    private void Update()
     {
-        // TODO: перемещение пули
+        transform.Translate(Vector2.right * velocity * Time.deltaTime);
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("lalala");
         if (collision.gameObject.tag == "Enemy")
-            Damage(collision.gameObject.GetComponent<Enemy>());
+        {
+            //Damage(collision.gameObject.GetComponent<Enemy>());
+            Destroy(gameObject);
+        }
     }
 
     virtual protected void Damage(Enemy target)

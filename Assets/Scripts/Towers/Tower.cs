@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private float cooldown;
     [SerializeField] private GameObject target;
+    [SerializeField] Transform shootPosition;
     private float timer;
     private float offset;
 
@@ -44,8 +45,7 @@ public class Tower : MonoBehaviour
     {
         float distX = target.transform.position.x - transform.position.x;
         float distY = target.transform.position.y - transform.position.y;
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg); // Проверить, написать без оффсета
-        Debug.Log(distX + " " + distY + " " + transform.rotation.z + " " + Mathf.Atan2(distY, distX) * Mathf.Rad2Deg);
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg);
     }
 
     private void Shoot()
@@ -53,9 +53,9 @@ public class Tower : MonoBehaviour
         if (target == null && enemyQueue.Count > 0)
             target = enemyQueue.Dequeue();
         if (target != null) Aim();
-        if (timer == 0f)
+        if (timer <= 0f)
         {
-            //Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Instantiate(bulletPrefab, shootPosition.position, transform.rotation);
             timer = cooldown;
         }
     }

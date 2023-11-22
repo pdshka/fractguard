@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9073073751156754738, guid: 658f77af9be54a948a7c1c491e920002, type: 3}
-  cooldown: 3
+  cooldown: 1
   target: {fileID: 0}
+  shootPosition: {fileID: 5243491590678834600}
 --- !u!58 &2128666502803481584
 CircleCollider2D:
   m_ObjectHideFlags: 0
