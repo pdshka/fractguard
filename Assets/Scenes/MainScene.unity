@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 64
+  m_AssetsPPU: 32
   m_RefResolutionX: 1920
   m_RefResolutionY: 1080
   m_UpscaleRT: 0
@@ -382,7 +382,7 @@ Transform:
   m_GameObject: {fileID: 1037536351}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3318737, y: 0.03567596, z: -0.08148745}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,14 +395,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037536351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 940f1b273b3756e4bb7f0baef1699877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   armyPatterns:
-  - {fileID: 3338123663635631529, guid: fd704d38fee659f4eaa5f607423842f2, type: 3}
+  - {fileID: 1975364790687550786, guid: 48c64950e8ef2504f864cc19e73a93b8, type: 3}
   enemyPrefab: {fileID: 1544045524}
+  currentEnemyCount: 0
 --- !u!1 &1131466846
 GameObject:
   m_ObjectHideFlags: 0

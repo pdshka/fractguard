@@ -1,31 +1,55 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
     [SerializeField] private GameObject enemyPrefab;
 
-    private int currentEnemyCount;
+    public int currentEnemyCount;
     private int enemiesSpawnedSoFar;
+    private int currentWaveNumber = 0;
+    private GameObject currentArmyPattern;
 
     private void Start()
     {
         LaunchNextWave();
     }
 
+    // возвращает другой рандомный фрактал
     private GameObject ChooseRandomFractalPattern()
     {
         int index = Random.Range(0, armyPatterns.Count - 1);
+
+        while (armyPatterns[index] == currentArmyPattern)
+        {
+            index = Random.Range(0, armyPatterns.Count - 1);
+        }
 
         return armyPatterns[index];
     }
 
     private void LaunchNextWave()
     {
-        GameObject armyPattern = ChooseRandomFractalPattern();
-        Instantiate(armyPattern);
-        // currentEnemyCount += ...
+        currentWaveNumber++;
+        if (currentWaveNumber % 5 == 1)
+        {
+            currentArmyPattern = ChooseRandomFractalPattern();
+        }
+        if (currentWaveNumber % 2 == 1)
+        {
+            /*foreach (SplineInstantiate.InstantiableItem enemy in currentArmyPattern.GetComponent<SplineInstantiate>().itemsToInstantiate)
+            {
+                enemy.Prefab.GetComponent<Enemy>()
+            }*/
+            
+        }
+        if (currentWaveNumber % 3 == 1)
+        {
+            // Увеличить территорию замка
+        }
+        Instantiate(currentArmyPattern);
     }
 
 
@@ -57,6 +81,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         if (currentEnemyCount <= 0)
         {
+            // Invoke Cooldown
             LaunchNextWave();
         }
     }
