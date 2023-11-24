@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 8f1cefd2617f1f748ad6ef461d3aa4e4
-=======
-guid: 4fe8936df0e751544870cfc12f1d1ff2
->>>>>>> main
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -38,11 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
     filterMode: 1
-=======
-    filterMode: 0
->>>>>>> main
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,20 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<< HEAD
   spriteMode: 1
-=======
-  spriteMode: 2
->>>>>>> main
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
   spritePixelsToUnits: 100
-=======
-  spritePixelsToUnits: 48
->>>>>>> main
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -88,11 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD
     textureCompression: 1
-=======
-    textureCompression: 0
->>>>>>> main
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -154,53 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
     sprites: []
-=======
-    sprites:
-    - serializedVersion: 2
-      name: tiles_0
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 811408b08ca8993479e78ec305d4a41a
-      internalID: -863108693
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles_1
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 16
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ca55d68a1518cf4c819b42e60561907
-      internalID: 1663062344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
->>>>>>> main
     outline: []
     physicsShape: []
     bones: []
@@ -211,13 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< HEAD
     nameFileIdTable: {}
-=======
-    nameFileIdTable:
-      tiles_0: -863108693
-      tiles_1: 1663062344
->>>>>>> main
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

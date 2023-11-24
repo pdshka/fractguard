@@ -136,7 +136,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-<<<<<<< HEAD
       name: wolf_run_anim_3
       rect:
         serializedVersion: 2
@@ -158,37 +157,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-=======
->>>>>>> main
       name: wolf_run_anim_0
       rect:
         serializedVersion: 2
         x: 16
-<<<<<<< HEAD
         y: 16
         width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-=======
-        y: 21
-        width: 32
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
->>>>>>> main
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: c0a3c3011c58ad043918394a04c4e7a3
       internalID: 956835722
-=======
-      spriteID: ddad8b8af38328c4db3af07d927fa9b5
-      internalID: 2078017918
->>>>>>> main
       vertices: []
       indices: 
       edges: []
@@ -198,31 +182,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-<<<<<<< HEAD
         y: 16
         width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-=======
-        y: 22
-        width: 32
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
->>>>>>> main
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: 26d39475e32a2b74f98ce252381e27b4
       internalID: -1722042306
-=======
-      spriteID: a249f0654fd387142847674e4ba7bfd8
-      internalID: 786350872
->>>>>>> main
       vertices: []
       indices: 
       edges: []
@@ -232,52 +203,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-<<<<<<< HEAD
         y: 16
         width: 32
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-=======
-        y: 21
-        width: 32
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
->>>>>>> main
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: 3d53bf121fe87ae43ae0a464bf756627
       internalID: 989878799
-=======
-      spriteID: 732135b7f5dbadb40ab3bac15fcc53fd
-      internalID: -395422559
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wolf_run_anim_3
-      rect:
-        serializedVersion: 2
-        x: 161
-        y: 22
-        width: 31
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ce8e24b8dac67c48ba617fda37c49c7
-      internalID: -1811317294
->>>>>>> main
       vertices: []
       indices: 
       edges: []
@@ -293,17 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-<<<<<<< HEAD
       wolf_run_anim_0: 956835722
       wolf_run_anim_1: -1722042306
       wolf_run_anim_2: 989878799
       wolf_run_anim_3: 1150535210
-=======
-      wolf_run_anim_0: 2078017918
-      wolf_run_anim_1: 786350872
-      wolf_run_anim_2: -395422559
-      wolf_run_anim_3: -1811317294
->>>>>>> main
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
