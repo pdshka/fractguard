@@ -35,12 +35,13 @@ public class TilemapVisualizer : MonoBehaviour
         }
     }
 
-    public void CreateBuilding(GameObject building, Vector2Int position)
+    public GameObject CreateBuilding(GameObject building, Vector2Int position)
     {
         GameObject newBuilding = Instantiate(building);
         newBuilding.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
         if (buildingsContainer != null)
             newBuilding.transform.SetParent(buildingsContainer.transform);
+        return newBuilding;
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)

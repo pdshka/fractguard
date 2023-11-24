@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 
 public class Tower : MonoBehaviour
 {
+    public int cost;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private float cooldown;
     [SerializeField] private GameObject target;
