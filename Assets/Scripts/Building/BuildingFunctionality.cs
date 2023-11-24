@@ -14,7 +14,7 @@ public class BuildingFunctionality : MonoBehaviour
     private void Start()
     {
         spriteRenderer.sprite = building.sprite;
-        resourceManager = GameObject.Find("ResourceManager").GetComponent<ResourceManager>();
+        resourceManager = FindObjectOfType<ResourceManager>();
         nextIncreaseTime = Time.time + building.timeBetweenIncreases;
     }
 

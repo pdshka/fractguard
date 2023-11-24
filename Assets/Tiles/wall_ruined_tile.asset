@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: tiles_1
+  m_Name: wall_ruined_tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 265516760, guid: 8f1cefd2617f1f748ad6ef461d3aa4e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6464a0e37661aaf47aad1dfe25b6f8e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
