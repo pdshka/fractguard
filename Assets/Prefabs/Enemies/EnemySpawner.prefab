@@ -50,4 +50,6 @@ MonoBehaviour:
   - {fileID: 7299196313999140647, guid: 8fc50466cdd66cd4e80920c00acd52e9, type: 3}
   - {fileID: 3338123663635631529, guid: fd704d38fee659f4eaa5f607423842f2, type: 3}
   - {fileID: 928582275214632654, guid: f37e29b7d4dc4b346813f0dc606796cd, type: 3}
+  - {fileID: 8647492078119189046, guid: 67512f55201ff4c4ca0352ad210d4044, type: 3}
+  - {fileID: 8647492078119189046, guid: 67512f55201ff4c4ca0352ad210d4044, type: 3}
   currentEnemyCount: 0
