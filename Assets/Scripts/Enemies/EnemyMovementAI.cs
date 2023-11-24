@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -9,6 +11,7 @@ public class EnemyMovementAI : MonoBehaviour
 {
     public float moveSpeed = 8f;
     private Enemy enemy;
+    [SerializeField] private float enemySightRadius = 5f;
     private readonly Vector3 initialTargetPosition = Vector3.zero;
     public Vector3 targetPosition;
     public bool targetReached = false;
@@ -30,6 +33,9 @@ public class EnemyMovementAI : MonoBehaviour
     {
         // Бежим в сторону главной башни
 
+        // Если видим заборчик, то бежим к заборчику
+        CheckForNewTarget();
+
         if (Vector3.Distance(transform.position, movePosition) < 0.2f)
         {
             // Idle();
@@ -49,6 +55,27 @@ public class EnemyMovementAI : MonoBehaviour
         float moveAngle = HelperUtilities.GetAngleFromVector(moveDirection);
         LookDirection lookDirection = HelperUtilities.GetLookDirection(moveAngle);
         SetLookAnimationParameters(lookDirection);
+    }
+
+    private void CheckForNewTarget()
+    {
+        Collider2D[] objectsInLineOfSight = Physics2D.OverlapCircleAll(transform.position, enemySightRadius, LayerMask.NameToLayer("Buildings"));
+
+        if (objectsInLineOfSight.Length > 0)
+        {
+            Collider2D closestCollider = null;
+            float minDistance = float.MaxValue;
+            foreach (Collider2D obj in objectsInLineOfSight)
+            {
+                float currentDistance = Vector3.Distance(obj.transform.position, transform.position);
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    closestCollider = obj;
+                }
+            }
+            targetPosition = closestCollider.transform.position;
+        }
     }
 
     /// <summary>

@@ -17,7 +17,7 @@ public class DraggingCamera : MonoBehaviour
     private Vector3 initialPosition;
     private Vector3 originPosition;
     private Vector3 difference;
-    private bool dragging = false;
+    private bool dragging;
 
     void Start()
     {
