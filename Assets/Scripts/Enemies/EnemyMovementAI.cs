@@ -10,6 +10,9 @@ public class EnemyMovementAI : MonoBehaviour
     public float moveSpeed = 8f;
     private Enemy enemy;
     private readonly Vector3 initialTargetPosition = Vector3.zero;
+    public Vector3 targetPosition;
+    public bool targetReached = false;
+
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
@@ -30,10 +33,10 @@ public class EnemyMovementAI : MonoBehaviour
         if (Vector3.Distance(transform.position, movePosition) < 0.2f)
         {
             // Idle();
-            // play attack animation
+            targetReached = true;
             return;
         }
-
+        targetReached = false;
 
         Vector3 moveDirection = (movePosition - transform.position).normalized;
         Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);

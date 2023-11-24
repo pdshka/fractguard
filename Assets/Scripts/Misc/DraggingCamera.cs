@@ -10,9 +10,9 @@ public class DraggingCamera : MonoBehaviour
     private float velocity = 0f;
     private float smoothTime = 0.25f;
 
-    private const float moveSpeed = 8f;
-    private const float xBorder = 50f;
-    private const float yBorder = 50f;
+    [SerializeField] private const float moveSpeed = 8f;
+    [SerializeField] private const float xBorder = 50f;
+    [SerializeField] private const float yBorder = 50f;
 
     private Vector3 initialPosition;
     private Vector3 originPosition;

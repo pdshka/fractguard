@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -5,11 +6,11 @@ using UnityEngine.Splines;
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
-    [SerializeField] private GameObject enemyPrefab;
 
-    public int currentEnemyCount;
+    [HideInInspector] public int currentEnemyCount;
     private int enemiesSpawnedSoFar;
     private int currentWaveNumber = 0;
+    private float wavesCooldown = 5f;
     private GameObject currentArmyPattern;
 
     private void Start()
@@ -33,6 +34,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     private void LaunchNextWave()
     {
         currentWaveNumber++;
+        Debug.Log(currentWaveNumber);
         if (currentWaveNumber % 5 == 1)
         {
             currentArmyPattern = ChooseRandomFractalPattern();
@@ -49,7 +51,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         {
             // Увеличить территорию замка
         }
-        Instantiate(currentArmyPattern);
+        //Instantiate(currentArmyPattern);
     }
 
 
@@ -81,9 +83,15 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         if (currentEnemyCount <= 0)
         {
-            // Invoke Cooldown
-            LaunchNextWave();
+            StartCoroutine(LaunchNextWaveAfterCooldown());
         }
     }
+
+    private IEnumerator LaunchNextWaveAfterCooldown()
+    {
+        yield return new WaitForSeconds(wavesCooldown);
+        LaunchNextWave();
+    }
+
 
 }
