@@ -24,6 +24,11 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        EnemySpawner.Instance.currentEnemyCount++;
+    }
+
     /// <summary>
     /// Initialise the enemy
     /// </summary>

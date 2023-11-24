@@ -1,34 +1,57 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
-    [SerializeField] private List<ArmyPatternSO> armyPatterns = new List<ArmyPatternSO>();
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
 
-    private int currentEnemyCount;
+    [HideInInspector] public int currentEnemyCount;
     private int enemiesSpawnedSoFar;
+    private int currentWaveNumber = 0;
+    private float wavesCooldown = 5f;
+    private GameObject currentArmyPattern;
 
     private void Start()
     {
         LaunchNextWave();
     }
 
-    private ArmyPatternSO ChooseRandomFractalPattern()
+    // возвращает другой рандомный фрактал
+    private GameObject ChooseRandomFractalPattern()
     {
         int index = Random.Range(0, armyPatterns.Count - 1);
+
+        while (armyPatterns[index] == currentArmyPattern)
+        {
+            index = Random.Range(0, armyPatterns.Count - 1);
+        }
 
         return armyPatterns[index];
     }
 
     private void LaunchNextWave()
     {
-        ArmyPatternSO armyPattern = ChooseRandomFractalPattern();
-        foreach (var position in armyPattern.positions)
+        currentWaveNumber++;
+        Debug.Log(currentWaveNumber);
+        if (currentWaveNumber % 5 == 1)
         {
-            CreateEnemy(enemyPrefab, position);
+            currentArmyPattern = ChooseRandomFractalPattern();
         }
-        // currentEnemyCount += ...
+        if (currentWaveNumber % 2 == 1)
+        {
+            /*foreach (SplineInstantiate.InstantiableItem enemy in currentArmyPattern.GetComponent<SplineInstantiate>().itemsToInstantiate)
+            {
+                enemy.Prefab.GetComponent<Enemy>()
+            }*/
+            
+        }
+        if (currentWaveNumber % 3 == 1)
+        {
+            // Увеличить территорию замка
+        }
+        //Instantiate(currentArmyPattern);
     }
 
 
@@ -60,8 +83,15 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         if (currentEnemyCount <= 0)
         {
-            LaunchNextWave();
+            StartCoroutine(LaunchNextWaveAfterCooldown());
         }
     }
+
+    private IEnumerator LaunchNextWaveAfterCooldown()
+    {
+        yield return new WaitForSeconds(wavesCooldown);
+        LaunchNextWave();
+    }
+
 
 }
