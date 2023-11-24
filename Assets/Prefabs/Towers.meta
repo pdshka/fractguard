@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animations.meta
+guid: 16c337f3833537841955ad2ccd1313ff
+========
 guid: 554126c3220466e47bd3a1e318c5c46b
+>>>>>>>> main:Assets/Prefabs/Towers.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
