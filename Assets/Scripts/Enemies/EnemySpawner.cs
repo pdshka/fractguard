@@ -7,7 +7,11 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
 
+    [SerializeField] private BaseGenerator baseGeneratorReference;
     [HideInInspector] public int currentEnemyCount;
+    [SerializeField] private int armyPatternChangeFrequency = 3;
+    [SerializeField] private int enemyBoostFrequency = 2;
+    [SerializeField] private int castleExpandFrequency = 5;
     private int enemiesSpawnedSoFar;
     private int currentWaveNumber = 0;
     private float wavesCooldown = 5f;
@@ -15,6 +19,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void Start()
     {
+        currentArmyPattern = ChooseRandomFractalPattern();
         LaunchNextWave();
     }
 
@@ -34,12 +39,12 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     private void LaunchNextWave()
     {
         currentWaveNumber++;
-        Debug.Log(currentWaveNumber);
-        if (currentWaveNumber % 5 == 1)
+        //Debug.Log(currentWaveNumber);
+        if (currentWaveNumber % armyPatternChangeFrequency == 1 && currentWaveNumber > 1)
         {
             currentArmyPattern = ChooseRandomFractalPattern();
         }
-        if (currentWaveNumber % 2 == 1)
+        if (currentWaveNumber % enemyBoostFrequency == 1 && currentWaveNumber > 1)
         {
             /*foreach (SplineInstantiate.InstantiableItem enemy in currentArmyPattern.GetComponent<SplineInstantiate>().itemsToInstantiate)
             {
@@ -47,11 +52,11 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
             }*/
             
         }
-        if (currentWaveNumber % 3 == 1)
+        if (currentWaveNumber % castleExpandFrequency == 1 && currentWaveNumber > 1)
         {
-            // Увеличить территорию замка
+            baseGeneratorReference.RunProceduralGeneration();
         }
-        //Instantiate(currentArmyPattern);
+        Instantiate(currentArmyPattern);
     }
 
 

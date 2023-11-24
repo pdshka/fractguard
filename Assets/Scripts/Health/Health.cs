@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
     #endregion
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int initialHealth;
-    [HideInInspector] public int currentHealth;
+    public int currentHealth;
     [HideInInspector] public HealthEvent healthEvent;
     private Coroutine effectCoroutine;
     protected bool hasHitEffect = false;

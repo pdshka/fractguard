@@ -25,7 +25,6 @@ public class EnemyAttackAI : MonoBehaviour
         {
             if (attackCooldownTimer <= 0f)
             {
-                // Debug.Log("Attack");
                 Attack();
                 attackCooldownTimer = attackCooldown;
             }
@@ -34,7 +33,7 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void Attack()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius, LayerMask.NameToLayer("Buildings"));
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius, enemy.enemyMovementAI.targetsLayerMask);
 
         enemy.animator.SetTrigger("attackTrigger");
 

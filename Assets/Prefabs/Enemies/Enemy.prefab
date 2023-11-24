@@ -69,7 +69,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4618834072349131719}
@@ -143,7 +143,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1003475116, guid: 009c8a10a31a80b43b777bc430c76e81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -251,7 +251,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a18cdda68d45141b59a36e2483899a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetsLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   moveSpeed: 0.5
+  enemySightRadius: 20
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetReached: 0
 --- !u!114 &3404262254550429159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCheck: {fileID: 81753043}
-  attackCheckRadius: 0.06
+  attackCheckRadius: 0.1
   enemyDamage: 5
 --- !u!1001 &1206899825849272596
 PrefabInstance:

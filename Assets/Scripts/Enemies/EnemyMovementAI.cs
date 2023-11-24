@@ -9,21 +9,27 @@ using UnityEngine.Splines;
 [DisallowMultipleComponent]
 public class EnemyMovementAI : MonoBehaviour
 {
+    public LayerMask targetsLayerMask;
     public float moveSpeed = 8f;
     private Enemy enemy;
     [SerializeField] private float enemySightRadius = 5f;
     private readonly Vector3 initialTargetPosition = Vector3.zero;
-    public Vector3 targetPosition;
-    public bool targetReached = false;
+    [HideInInspector] public Vector3 targetPosition;
+    [HideInInspector] public bool targetReached = false;
 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
     }
 
+    private void Start()
+    {
+        targetPosition = initialTargetPosition;
+    }
+
     private void Update()
     {
-        MoveEnemy(initialTargetPosition);
+        MoveEnemy(targetPosition);
     }
 
     /// <summary>
@@ -59,7 +65,7 @@ public class EnemyMovementAI : MonoBehaviour
 
     private void CheckForNewTarget()
     {
-        Collider2D[] objectsInLineOfSight = Physics2D.OverlapCircleAll(transform.position, enemySightRadius, LayerMask.NameToLayer("Buildings"));
+        Collider2D[] objectsInLineOfSight = Physics2D.OverlapCircleAll(transform.position, enemySightRadius, targetsLayerMask);
 
         if (objectsInLineOfSight.Length > 0)
         {
@@ -74,7 +80,7 @@ public class EnemyMovementAI : MonoBehaviour
                     closestCollider = obj;
                 }
             }
-            targetPosition = closestCollider.transform.position;
+            targetPosition = closestCollider.ClosestPoint(transform.position);
         }
     }
 
