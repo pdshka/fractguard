@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74023feebc24f1e49bd7d6b632f19009, type: 3}
   m_Name: Sawmill
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: b90ffc2fb76d64a4bb32817e15b9a89c, type: 3}
+  sprite: {fileID: 21300000, guid: a0cce39542860fe4b8c9fe12c2878177, type: 3}
   resource: {fileID: 11400000, guid: 301dd2921c6d5c14b828fba6a3aac74a, type: 2}
   resourceIncrease: 1
   timeBetweenIncreases: 3

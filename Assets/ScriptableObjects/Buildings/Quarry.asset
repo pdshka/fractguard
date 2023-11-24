@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74023feebc24f1e49bd7d6b632f19009, type: 3}
   m_Name: Quarry
   m_EditorClassIdentifier: 
-  sprite: {fileID: 2747690628134850419, guid: df5cea62e03d6394ab83344bafb4a9c2, type: 3}
+  sprite: {fileID: 21300000, guid: c7690778474cea54094c8a2e65f04edc, type: 3}
   resource: {fileID: 11400000, guid: a99c300b1afc0ad45a7c934987e6c436, type: 2}
   resourceIncrease: 2
   timeBetweenIncreases: 10
