@@ -31,6 +31,9 @@ public class BaseGenerator : MonoBehaviour
     {
         floorPositions = tilemapVisualizer.GetFloorTilePositions();
         wallPositions = tilemapVisualizer.GetWallPositions();
+        tilemapVisualizer.CreateWalls(wallPositions);
+        wallPositions.UnionWith(floorPositions);
+        floorPositions.Clear();
     }
 
     public Vector2Int GetRandomStartPosition()
