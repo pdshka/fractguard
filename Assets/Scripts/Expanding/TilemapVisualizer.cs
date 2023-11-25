@@ -71,7 +71,7 @@ public class TilemapVisualizer : MonoBehaviour
         HashSet<Vector2Int> tilePositions = new HashSet<Vector2Int>();
 
         BoundsInt bounds = tilemap.cellBounds;
-        Debug.Log(bounds);
+        //Debug.Log(bounds);
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
 
         for (int x = 0; x < bounds.size.x; x++)

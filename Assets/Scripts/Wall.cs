@@ -63,6 +63,6 @@ public class Wall : MonoBehaviour
     {
         destroyed = false;
         spriteRenderer.sprite = wallFixed;
-        health.AddHealth(100.0f);
+        health.ResetHealth();
     }
 }

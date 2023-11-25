@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BuildingDisplay : MonoBehaviour
+public class TowerDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Building building;
+    private Tower tower;
     [SerializeField]
     private TMP_Text moneyVal;
     [SerializeField]
@@ -15,12 +15,10 @@ public class BuildingDisplay : MonoBehaviour
     [SerializeField]
     private TMP_Text woodVal;
 
-
     private void Start()
     {
-        GetComponent<Image>().sprite = building.sprite;
-        moneyVal.text = building.money.ToString();
-        stoneVal.text = building.stone.ToString();
-        woodVal.text = building.wood.ToString();
+        moneyVal.text = tower.money.ToString();
+        stoneVal.text = tower.stone.ToString();
+        woodVal.text = tower.wood.ToString();
     }
 }
