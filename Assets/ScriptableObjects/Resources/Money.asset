@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Money
   m_EditorClassIdentifier: 
   resourceName: money
-  sprite: {fileID: 21300000, guid: 6ccdf97da4738284f809866a82b0adb9, type: 3}
+  sprite: {fileID: 984476082, guid: e5ec5131d23671044881b012fd0db5e9, type: 3}
