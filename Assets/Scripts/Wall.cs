@@ -4,19 +4,48 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] private int defence = 100;
+    [HideInInspector] public HealthEvent healthEvent;
+    public GameObject tower;
+    public Sprite wallFixed;
+    public Sprite wallDestroyed;
 
-    public void TakeDamage(int damage)
+    private SpriteRenderer spriteRenderer;
+    private Collider2D wallCollider;
+
+    private void Awake()
     {
-        defence -= damage;
-        if (defence < 0)
+        healthEvent = GetComponent<HealthEvent>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        wallCollider = GetComponent<Collider2D>();
+    }
+
+    private void OnEnable()
+    {
+        //subscribe to health event
+        healthEvent.OnHealthChanged += HealthEvent_OnHealthLost;
+    }
+
+    private void OnDisable()
+    {
+        // unsubscribe from health event
+        healthEvent.OnHealthChanged -= HealthEvent_OnHealthLost;
+    }
+
+    private void HealthEvent_OnHealthLost(HealthEvent healthEvent, HealthEventArgs healthEventArgs)
+    {
+        if (healthEventArgs.healthAmount <= 0)
         {
-            Break();
+            WallDestroyed();
         }
     }
 
-    public void Break()
+    private void WallDestroyed()
     {
-        GameObject.Destroy(gameObject);
+        if (tower != null)
+        {
+            GameObject.Destroy(tower);
+        }
+        spriteRenderer.sprite = wallDestroyed;
+        wallCollider.isTrigger = true;
     }
 }

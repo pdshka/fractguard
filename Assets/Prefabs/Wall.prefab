@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5899742003926088333}
   - component: {fileID: 8619364400185886189}
   - component: {fileID: 3053548704322281500}
+  - component: {fileID: 218145508068502136}
   - component: {fileID: 2278469540060462413}
   - component: {fileID: 267593459455892252}
   m_Layer: 6
@@ -64,6 +65,22 @@ MonoBehaviour:
   currentHealth: 0
   healthEvent: {fileID: 0}
   isDamageable: 1
+--- !u!114 &218145508068502136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899742003926088334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d607324fda0abe2418b3f2fd688a740e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthEvent: {fileID: 0}
+  tower: {fileID: 0}
+  wallFixed: {fileID: 21300000, guid: 940f6736ff3453147837b9d169840a12, type: 3}
+  wallDestroyed: {fileID: 21300000, guid: 6464a0e37661aaf47aad1dfe25b6f8e2, type: 3}
 --- !u!212 &2278469540060462413
 SpriteRenderer:
   m_ObjectHideFlags: 0
