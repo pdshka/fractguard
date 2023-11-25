@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -15,7 +17,18 @@ public class BuildingManager : MonoBehaviour
     [SerializeField]
     private Sprite fixingSprite;
     [SerializeField]
-    private int fixCost;
+    private int fixMoney;
+    [SerializeField]
+    private int fixStone;
+    [SerializeField]
+    private int fixWood;
+    [Header("Repair UI")]
+    [SerializeField]
+    private TMP_Text moneyVal;
+    [SerializeField]
+    private TMP_Text stoneVal;
+    [SerializeField]
+    private TMP_Text woodVal;
 
     private ResourceManager resourceManager;
 
@@ -28,6 +41,9 @@ public class BuildingManager : MonoBehaviour
     {
         resourceManager = FindObjectOfType<ResourceManager>();
         baseGenerator = FindObjectOfType<BaseGenerator>();
+        moneyVal.text = fixMoney.ToString();
+        stoneVal.text = fixStone.ToString();
+        woodVal.text = fixWood.ToString();
     }
 
     private void Update()
@@ -90,11 +106,12 @@ public class BuildingManager : MonoBehaviour
                 if (nearestDistance < 0.5f)
                 {
                     var w = baseGenerator.wallPositions[nearestTile].GetComponent<Wall>();
-                    //if (w.destroyed)
+                    if (w.destroyed)
                     {
                         w.Fix();
-                        resourceManager.DecreaseResources("money", fixCost);
+                        DecreaseResources(fixMoney, fixStone, fixWood);
                         Debug.Log("Wall fixed");
+                        ResetState();
                     }
                 }
             }
@@ -103,7 +120,7 @@ public class BuildingManager : MonoBehaviour
 
     public void TryToBuild(Building building)
     {
-        if (resourceManager.GetResourceAmount("money") >= building.cost)
+        if (CheckCost(building.money, building.stone, building.wood))
         {
             customCursor.gameObject.SetActive(true);
             customCursor.GetComponent<SpriteRenderer>().sprite = building.sprite;
@@ -114,7 +131,7 @@ public class BuildingManager : MonoBehaviour
     public void TryToBuild(GameObject tower)
     {
         Tower t = tower.GetComponent<Tower>();
-        if (resourceManager.GetResourceAmount("money") >= t.cost)
+        if (CheckCost(t.money, t.stone, t.wood))
         {
             customCursor.gameObject.SetActive(true);
             customCursor.GetComponent<SpriteRenderer>().sprite = t.GetComponent<SpriteRenderer>().sprite;
@@ -124,17 +141,20 @@ public class BuildingManager : MonoBehaviour
 
     public void TryToFix()
     {
-        if (resourceManager.GetResourceAmount("money") < fixCost)
-            return;
-        fixing = !fixing;
-        if (fixing)
+        currentBuilding = null;
+        currentTower = null;
+        if (CheckCost(fixMoney, fixStone, fixWood))
         {
-            customCursor.gameObject.SetActive(true);
-            customCursor.GetComponent<SpriteRenderer>().sprite = fixingSprite;
-        }
-        else
-        {
-            ResetState();
+            fixing = !fixing;
+            if (fixing)
+            {
+                customCursor.gameObject.SetActive(true);
+                customCursor.GetComponent<SpriteRenderer>().sprite = fixingSprite;
+            }
+            else
+            {
+                ResetState();
+            }
         }
     }
 
@@ -143,7 +163,7 @@ public class BuildingManager : MonoBehaviour
         buildingsPositions.Add(position);
         buildingPrefab.GetComponent<BuildingFunctionality>().building = currentBuilding;
         baseGenerator.CreateBuilding(buildingPrefab, position);
-        resourceManager.DecreaseResources("money", currentBuilding.cost);
+        DecreaseResources(building.money, building.stone, building.wood);
         ResetState();
     }
 
@@ -154,7 +174,8 @@ public class BuildingManager : MonoBehaviour
         t.transform.SetParent(w.transform);
         w.GetComponent<Wall>().AttachTower(t);
         //t.GetComponent<SpriteRenderer>().sortingOrder = 1; // TODO: change logic of tower sorting
-        resourceManager.DecreaseResources("money", tower.GetComponent<Tower>().cost);
+        var tow = tower.GetComponent<Tower>();
+        DecreaseResources(tow.money, tow.stone, tow.wood);
         ResetState();
     }
 
@@ -164,5 +185,20 @@ public class BuildingManager : MonoBehaviour
         currentBuilding = null;
         currentTower = null;
         fixing = false;
+    }
+
+    private bool CheckCost(int money, int stone, int wood)
+    {
+        return 
+            resourceManager.GetResourceAmount("money") >= money &&
+            resourceManager.GetResourceAmount("stone") >= stone &&
+            resourceManager.GetResourceAmount("wood") >= wood;
+    }
+
+    private void DecreaseResources(int money, int stone, int wood)
+    {
+        resourceManager.DecreaseResources("money", money);
+        resourceManager.DecreaseResources("stone", stone);
+        resourceManager.DecreaseResources("wood", wood);
     }
 }
