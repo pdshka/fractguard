@@ -51,5 +51,9 @@ MonoBehaviour:
   - {fileID: 3338123663635631529, guid: fd704d38fee659f4eaa5f607423842f2, type: 3}
   - {fileID: 928582275214632654, guid: f37e29b7d4dc4b346813f0dc606796cd, type: 3}
   - {fileID: 8647492078119189046, guid: 67512f55201ff4c4ca0352ad210d4044, type: 3}
-  - {fileID: 8647492078119189046, guid: 67512f55201ff4c4ca0352ad210d4044, type: 3}
+  - {fileID: 8661671354448523286, guid: b8241ad531f4da046b0c50d527da8cdd, type: 3}
+  - {fileID: 2610216583485812399, guid: b19cae543193b364a827b83a127b0f19, type: 3}
   currentEnemyCount: 0
+  armyPatternChangeFrequency: 3
+  enemyBoostFrequency: 2
+  castleExpandFrequency: 5

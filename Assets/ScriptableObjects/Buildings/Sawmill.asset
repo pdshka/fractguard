@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74023feebc24f1e49bd7d6b632f19009, type: 3}
+  m_Name: Sawmill
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: a0cce39542860fe4b8c9fe12c2878177, type: 3}
+  resource: {fileID: 11400000, guid: 301dd2921c6d5c14b828fba6a3aac74a, type: 2}
+  resourceIncrease: 1
+  timeBetweenIncreases: 3
+  cost: 10
