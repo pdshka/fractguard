@@ -5,16 +5,19 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     [HideInInspector] public HealthEvent healthEvent;
+    private Health health;
     public GameObject tower;
     public Sprite wallFixed;
     public Sprite wallDestroyed;
 
     private SpriteRenderer spriteRenderer;
-    private Collider2D wallCollider;
+    public Collider2D wallCollider;
+    public bool destroyed = false;
 
     private void Awake()
     {
         healthEvent = GetComponent<HealthEvent>();
+        health = GetComponent<Health>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         wallCollider = GetComponent<Collider2D>();
     }
@@ -47,5 +50,19 @@ public class Wall : MonoBehaviour
         }
         spriteRenderer.sprite = wallDestroyed;
         wallCollider.isTrigger = true;
+        destroyed = true;
+    }
+
+    public void AttachTower(GameObject tower)
+    {
+        this.tower = tower;
+        spriteRenderer.sprite = null;
+    }
+
+    public void Fix()
+    {
+        destroyed = false;
+        spriteRenderer.sprite = wallFixed;
+        health.AddHealth(100.0f);
     }
 }
