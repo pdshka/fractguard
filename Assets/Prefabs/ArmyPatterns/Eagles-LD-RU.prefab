@@ -672,8 +672,8 @@ MonoBehaviour:
     randomZ: 0
     space: 0
   m_RotationOffset:
-    setup: 0
-    min: {x: 0, y: 0, z: 0}
+    setup: 1
+    min: {x: 0, y: 0, z: -66}
     max: {x: 0, y: 0, z: 0}
     randomX: 0
     randomY: 0
@@ -1362,8 +1362,8 @@ MonoBehaviour:
     randomZ: 0
     space: 0
   m_RotationOffset:
-    setup: 0
-    min: {x: 0, y: 0, z: 0}
+    setup: 1
+    min: {x: 0, y: 0, z: -246}
     max: {x: 0, y: 0, z: 0}
     randomX: 0
     randomY: 0
@@ -1404,7 +1404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8661671354448523286}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.5451973, w: 0.8383078}
+  m_LocalRotation: {x: 0, y: 0, z: 0.54463905, w: 0.8386706}
   m_LocalPosition: {x: -14.4248, y: -6.8930683, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1412,4 +1412,4 @@ Transform:
   - {fileID: 2250188462477511186}
   - {fileID: 6255791517739025127}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 66.076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 66}
