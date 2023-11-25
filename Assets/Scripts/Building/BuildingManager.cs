@@ -11,12 +11,18 @@ public class BuildingManager : MonoBehaviour
     private BaseGenerator baseGenerator;
     [SerializeField]
     private CustomCursor customCursor;
+    [Header("Repair settings")]
+    [SerializeField]
+    private Sprite fixingSprite;
+    [SerializeField]
+    private int fixCost;
 
     private ResourceManager resourceManager;
 
     private HashSet<Vector2Int> buildingsPositions = new HashSet<Vector2Int>();
     private Building currentBuilding;
     private GameObject currentTower = null;
+    private bool fixing = false;
 
     private void Start()
     {
@@ -68,6 +74,30 @@ public class BuildingManager : MonoBehaviour
                     }
                 }
             }
+            else if (fixing)
+            {
+                Vector2Int nearestTile = Vector2Int.zero;
+                float nearestDistance = float.MaxValue;
+                foreach (var tile in baseGenerator.wallPositions.Keys)
+                {
+                    float dist = Vector2.Distance(baseGenerator.CellToWorld((Vector3Int)tile), Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    if (dist < nearestDistance)
+                    {
+                        nearestTile = tile;
+                        nearestDistance = dist;
+                    }
+                }
+                if (nearestDistance < 0.5f)
+                {
+                    var w = baseGenerator.wallPositions[nearestTile].GetComponent<Wall>();
+                    //if (w.destroyed)
+                    {
+                        w.Fix();
+                        resourceManager.DecreaseResources("money", fixCost);
+                        Debug.Log("Wall fixed");
+                    }
+                }
+            }
         }
     }
 
@@ -89,6 +119,22 @@ public class BuildingManager : MonoBehaviour
             customCursor.gameObject.SetActive(true);
             customCursor.GetComponent<SpriteRenderer>().sprite = t.GetComponent<SpriteRenderer>().sprite;
             currentTower = tower;
+        }
+    }
+
+    public void TryToFix()
+    {
+        if (resourceManager.GetResourceAmount("money") < fixCost)
+            return;
+        fixing = !fixing;
+        if (fixing)
+        {
+            customCursor.gameObject.SetActive(true);
+            customCursor.GetComponent<SpriteRenderer>().sprite = fixingSprite;
+        }
+        else
+        {
+            ResetState();
         }
     }
 
@@ -117,5 +163,6 @@ public class BuildingManager : MonoBehaviour
         customCursor.gameObject.SetActive(false);
         currentBuilding = null;
         currentTower = null;
+        fixing = false;
     }
 }
