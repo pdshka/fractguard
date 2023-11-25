@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 
 public class BaseGenerator : MonoBehaviour
 {
-    public HashSet<Vector2Int> floorPositions;
+    public HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
     public HashSet<Vector2Int> wallPositions;
+    private HashSet<Vector2Int> castlePositions;
 
     private Vector2Int startPosition;
 
@@ -29,11 +30,9 @@ public class BaseGenerator : MonoBehaviour
 
     private void Start()
     {
-        floorPositions = tilemapVisualizer.GetFloorTilePositions();
+        castlePositions = tilemapVisualizer.GetFloorTilePositions();
         wallPositions = tilemapVisualizer.GetWallPositions();
         tilemapVisualizer.CreateWalls(wallPositions);
-        wallPositions.UnionWith(floorPositions);
-        floorPositions.Clear();
     }
 
     public Vector2Int GetRandomStartPosition()
@@ -45,7 +44,7 @@ public class BaseGenerator : MonoBehaviour
             foreach (var direction in directionList)
             {
                 var neighborPosition = startPosition + direction;
-                if (!floorPositions.Contains(neighborPosition) && !wallPositions.Contains(neighborPosition))
+                if (!floorPositions.Contains(neighborPosition) && !wallPositions.Contains(neighborPosition) && !castlePositions.Contains(neighborPosition))
                 {
                     return neighborPosition;
                 }
@@ -76,7 +75,7 @@ public class BaseGenerator : MonoBehaviour
             HashSet<Vector2Int> path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, walkLength);
             foreach (var position in path)
             {
-                if(!floorPositions.Contains(position) && !wallPositions.Contains(position))
+                if(!floorPositions.Contains(position) && !wallPositions.Contains(position) && !castlePositions.Contains(position))
                 {
                     newFloorPositions.Add(position);
                     if (symmetry)
@@ -119,9 +118,9 @@ public class BaseGenerator : MonoBehaviour
         return newWallPositions;
     }
 
-    public void CreateBuilding(GameObject building, Vector2Int position)
+    public GameObject CreateBuilding(GameObject building, Vector2Int position)
     {
-        tilemapVisualizer.CreateBuilding(building, position);
+        return tilemapVisualizer.CreateBuilding(building, position);
     }
 
     public Vector3Int WorldToCell(Vector3 position)
