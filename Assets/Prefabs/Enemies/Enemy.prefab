@@ -254,8 +254,8 @@ MonoBehaviour:
   targetsLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 0.5
-  enemySightRadius: 20
+  moveSpeed: 0.7
+  enemySightRadius: 10
   targetPosition: {x: 0, y: 0, z: 0}
   targetReached: 0
 --- !u!114 &3404262254550429159

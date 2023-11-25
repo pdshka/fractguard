@@ -16,6 +16,9 @@ public class EnemyMovementAI : MonoBehaviour
     private readonly Vector3 initialTargetPosition = Vector3.zero;
     [HideInInspector] public Vector3 targetPosition;
     [HideInInspector] public bool targetReached = false;
+    private const float pathRebuildCooldown = 2f;
+    private float pathRebuildCooldownTimer;
+    private bool pathRebuildNeeded = false;
 
     private void Awake()
     {
@@ -29,6 +32,10 @@ public class EnemyMovementAI : MonoBehaviour
 
     private void Update()
     {
+        if (pathRebuildCooldownTimer > 0f)
+        {
+            pathRebuildCooldownTimer -= Time.deltaTime;
+        }
         MoveEnemy(targetPosition);
     }
 
@@ -40,7 +47,11 @@ public class EnemyMovementAI : MonoBehaviour
         // Бежим в сторону главной башни
 
         // Если видим заборчик, то бежим к заборчику
-        CheckForNewTarget();
+        if (pathRebuildCooldownTimer <= 0f)
+        {
+            CheckForNewTarget();
+            pathRebuildCooldownTimer = pathRebuildCooldown;
+        }
 
         if (Vector3.Distance(transform.position, movePosition) < 0.2f)
         {
@@ -73,14 +84,27 @@ public class EnemyMovementAI : MonoBehaviour
             float minDistance = float.MaxValue;
             foreach (Collider2D obj in objectsInLineOfSight)
             {
-                float currentDistance = Vector3.Distance(obj.transform.position, transform.position);
+                if (obj.gameObject.tag == "MainBuilding")
+                {
+                    closestCollider = obj;
+                    break;
+                }
+                
+                float destroyedPriorityContribution = 0f;
+                if (obj.isTrigger)
+                {
+                    destroyedPriorityContribution = -6f;
+                }
+                
+                float currentDistance = Vector3.Distance(obj.transform.position, transform.position) 
+                    + Vector3.Magnitude(obj.transform.position) + destroyedPriorityContribution; // 2-е - расстояние до центра карты от стены
                 if (currentDistance < minDistance)
                 {
                     minDistance = currentDistance;
                     closestCollider = obj;
                 }
             }
-            targetPosition = closestCollider.ClosestPoint(transform.position);
+            targetPosition = closestCollider.isTrigger ? closestCollider.transform.position : closestCollider.ClosestPoint(transform.position);
         }
     }
 
