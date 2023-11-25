@@ -16,7 +16,6 @@ public class BuildingManager : MonoBehaviour
 
     private HashSet<Vector2Int> buildingsPositions = new HashSet<Vector2Int>();
     private Building currentBuilding;
-    private HashSet<Vector2Int> towersPositions = new HashSet<Vector2Int>();
     private GameObject currentTower = null;
 
     private void Start()
@@ -51,7 +50,7 @@ public class BuildingManager : MonoBehaviour
             {
                 Vector2Int nearestTile = Vector2Int.zero;
                 float nearestDistance = float.MaxValue;
-                foreach (var tile in baseGenerator.wallPositions)
+                foreach (var tile in baseGenerator.wallPositions.Keys)
                 {
                     float dist = Vector2.Distance(baseGenerator.CellToWorld((Vector3Int)tile) + new Vector3(0, 1, 0), Camera.main.ScreenToWorldPoint(Input.mousePosition));
                     if (dist < nearestDistance)
@@ -60,9 +59,13 @@ public class BuildingManager : MonoBehaviour
                         nearestDistance = dist;
                     }
                 }
-                if (!towersPositions.Contains(nearestTile) && nearestDistance < 0.5f)
+                if (nearestDistance < 0.5f)
                 {
-                    Build(currentTower, nearestTile);
+                    var w = baseGenerator.wallPositions[nearestTile].GetComponent<Wall>();
+                    if (!w.destroyed && w.tower == null)
+                    {
+                        Build(currentTower, nearestTile);
+                    }
                 }
             }
         }
@@ -100,9 +103,11 @@ public class BuildingManager : MonoBehaviour
 
     private void Build(GameObject tower, Vector2Int position)
     {
-        towersPositions.Add(position);
         var t = baseGenerator.CreateBuilding(tower, position);
-        t.GetComponent<SpriteRenderer>().sortingOrder = 1; // TODO: change logic of tower sorting
+        var w = baseGenerator.wallPositions[position];
+        t.transform.SetParent(w.transform);
+        w.GetComponent<Wall>().AttachTower(t);
+        //t.GetComponent<SpriteRenderer>().sortingOrder = 1; // TODO: change logic of tower sorting
         resourceManager.DecreaseResources("money", tower.GetComponent<Tower>().cost);
         ResetState();
     }

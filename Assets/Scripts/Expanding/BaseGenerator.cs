@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class BaseGenerator : MonoBehaviour
 {
     public HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-    public HashSet<Vector2Int> wallPositions;
+    public Dictionary<Vector2Int, GameObject> wallPositions = new Dictionary<Vector2Int, GameObject>();
     private HashSet<Vector2Int> castlePositions;
 
     private Vector2Int startPosition;
@@ -31,20 +31,19 @@ public class BaseGenerator : MonoBehaviour
     private void Start()
     {
         castlePositions = tilemapVisualizer.GetFloorTilePositions();
-        wallPositions = tilemapVisualizer.GetWallPositions();
-        tilemapVisualizer.CreateWalls(wallPositions);
+        wallPositions = tilemapVisualizer.CreateWalls(tilemapVisualizer.GetWallPositions());
     }
 
     public Vector2Int GetRandomStartPosition()
     {
         while(true)
         {
-            Vector2Int startPosition = wallPositions.ElementAt(Random.Range(0, wallPositions.Count));
+            Vector2Int startPosition = wallPositions.Keys.ElementAt(Random.Range(0, wallPositions.Count));
             List<Vector2Int> directionList = startPosition.y % 2 == 0 ? DirectionHex.cardinalDirectionsEvenY : DirectionHex.cardinalDirectionsOddY;
             foreach (var direction in directionList)
             {
                 var neighborPosition = startPosition + direction;
-                if (!floorPositions.Contains(neighborPosition) && !wallPositions.Contains(neighborPosition) && !castlePositions.Contains(neighborPosition))
+                if (!floorPositions.Contains(neighborPosition) && !wallPositions.Keys.Contains(neighborPosition) && !castlePositions.Contains(neighborPosition))
                 {
                     return neighborPosition;
                 }
@@ -60,9 +59,8 @@ public class BaseGenerator : MonoBehaviour
         tilemapVisualizer.PaintFloorTiles(newFloorPositions);
         floorPositions.UnionWith(newFloorPositions);
 
-        HashSet<Vector2Int> newWallPositions = FindWallsHex(newFloorPositions, wallPositions);
-        tilemapVisualizer.CreateWalls(newWallPositions);
-        wallPositions.UnionWith(newWallPositions);
+        HashSet<Vector2Int> newWallPositions = FindWallsHex(newFloorPositions, wallPositions.Keys.ToHashSet());
+        wallPositions.Union(tilemapVisualizer.CreateWalls(newWallPositions));
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
@@ -75,7 +73,7 @@ public class BaseGenerator : MonoBehaviour
             HashSet<Vector2Int> path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, walkLength);
             foreach (var position in path)
             {
-                if(!floorPositions.Contains(position) && !wallPositions.Contains(position) && !castlePositions.Contains(position))
+                if(!floorPositions.Contains(position) && !wallPositions.Keys.Contains(position) && !castlePositions.Contains(position))
                 {
                     newFloorPositions.Add(position);
                     if (symmetry)
