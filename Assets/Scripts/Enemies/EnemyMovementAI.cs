@@ -116,7 +116,6 @@ public class EnemyMovementAI : MonoBehaviour
                 // пропускаем текущий коллайдер
                 if (obj.OverlapPoint(transform.position))
                 {
-                    Debug.Log("wolf in the trigger");
                     continue;
                 }
                 // √лавное здание

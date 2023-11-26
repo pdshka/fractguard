@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -8,20 +9,23 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
 
     [SerializeField] private BaseGenerator baseGeneratorReference;
+    [SerializeField] private TextMeshProUGUI wavesText;
     [HideInInspector] public int currentEnemyCount;
     [HideInInspector] public int enemiesSpawnedSoFar;
     [SerializeField] private int armyPatternChangeFrequency = 3;
     [SerializeField] private int enemyBoostFrequency = 2;
     [SerializeField] private int castleExpandFrequency = 5;
-    
+    [SerializeField] private int wavesCooldown = 30;
+    private int wavesCooldownTimer;
+
     private int currentWaveNumber = 0;
-    private float wavesCooldown = 5f;
+    
     private GameObject currentArmyPattern;
 
     private void Start()
     {
         currentArmyPattern = ChooseRandomFractalPattern();
-        LaunchNextWave();
+        StartCoroutine(LaunchNextWaveAfterCooldown());
     }
 
     // возвращает другой рандомный фрактал
@@ -40,6 +44,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     private void LaunchNextWave()
     {
         currentWaveNumber++;
+        wavesText.text = "Волна " + currentWaveNumber;
         //Debug.Log(currentWaveNumber);
         if (currentWaveNumber % armyPatternChangeFrequency == 1 && currentWaveNumber > 1)
         {
@@ -93,9 +98,22 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         }
     }
 
+    private void UpdateWaveTimerText()
+    {
+        wavesText.text = string.Format("00:{0:d2}\nдо волны {1:d}", wavesCooldownTimer, currentWaveNumber + 1);
+    }
+
     private IEnumerator LaunchNextWaveAfterCooldown()
     {
-        yield return new WaitForSeconds(wavesCooldown);
+        wavesCooldownTimer = wavesCooldown;
+        
+        while (wavesCooldownTimer > 0)
+        {
+            UpdateWaveTimerText();
+            yield return new WaitForSeconds(1f);
+            wavesCooldownTimer--;
+        }
+
         LaunchNextWave();
     }
 
