@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private Vector3 direction;
     [SerializeField] private float velocity;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     private float timer;
 
     private void Start()
@@ -27,13 +27,8 @@ public class Bullet : MonoBehaviour
         Debug.Log("lalala");
         if (collision.gameObject.tag == "Enemy")
         {
-            //Damage(collision.gameObject.GetComponent<Enemy>());
+            collision.gameObject.GetComponent<Health>().TakeDamage(damage);
             Destroy(gameObject);
         }
-    }
-
-    virtual protected void Damage(Enemy target)
-    {
-        // TODO: Сделать функцию получения урона в Enemy и вызвать ее
     }
 }
