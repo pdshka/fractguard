@@ -162,4 +162,5 @@ public class Health : MonoBehaviour
         currentHealth = initialHealth;
     }
 
+    public int GetInitialHealth() => initialHealth;
 }
