@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
     #endregion
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int initialHealth;
-    [HideInInspector] public int currentHealth;
+    public int currentHealth;
     [HideInInspector] public HealthEvent healthEvent;
     private Coroutine effectCoroutine;
     protected bool hasHitEffect = false;
@@ -154,4 +154,13 @@ public class Health : MonoBehaviour
         CallHealthEvent(0);
     }
 
+    /// <summary>
+    /// Reset health to initial value
+    /// </summary>
+    public void ResetHealth()
+    {
+        currentHealth = initialHealth;
+    }
+
+    public int GetInitialHealth() => initialHealth;
 }

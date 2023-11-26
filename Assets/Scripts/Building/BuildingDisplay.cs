@@ -8,10 +8,19 @@ public class BuildingDisplay : MonoBehaviour
 {
     [SerializeField]
     private Building building;
+    [SerializeField]
+    private TMP_Text moneyVal;
+    [SerializeField]
+    private TMP_Text stoneVal;
+    [SerializeField]
+    private TMP_Text woodVal;
+
 
     private void Start()
     {
         GetComponent<Image>().sprite = building.sprite;
-        GetComponentInChildren<TMP_Text>().text = building.cost.ToString();
+        moneyVal.text = building.money.ToString();
+        stoneVal.text = building.stone.ToString();
+        woodVal.text = building.wood.ToString();
     }
 }

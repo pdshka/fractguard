@@ -24,23 +24,27 @@ public class TilemapVisualizer : MonoBehaviour
         PaintTiles(floorPositions, floorTilemap, floorTile);
     }
 
-    public void CreateWalls(IEnumerable<Vector2Int> wallPositions)
+    public Dictionary<Vector2Int, GameObject> CreateWalls(IEnumerable<Vector2Int> wallPositions)
     {
+        Dictionary<Vector2Int, GameObject> walls = new Dictionary<Vector2Int, GameObject>();
         foreach (var position in wallPositions)
         {
             GameObject newWall = GameObject.Instantiate(wallObject);
             newWall.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
             if (wallsContainer != null)
                 newWall.transform.SetParent(wallsContainer.transform);
+            walls.Add(position, newWall);
         }
+        return walls;
     }
 
-    public void CreateBuilding(GameObject building, Vector2Int position)
+    public GameObject CreateBuilding(GameObject building, Vector2Int position)
     {
         GameObject newBuilding = Instantiate(building);
         newBuilding.transform.position = floorTilemap.CellToWorld((Vector3Int)position);
         if (buildingsContainer != null)
             newBuilding.transform.SetParent(buildingsContainer.transform);
+        return newBuilding;
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
@@ -67,7 +71,7 @@ public class TilemapVisualizer : MonoBehaviour
         HashSet<Vector2Int> tilePositions = new HashSet<Vector2Int>();
 
         BoundsInt bounds = tilemap.cellBounds;
-        Debug.Log(bounds);
+        //Debug.Log(bounds);
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
 
         for (int x = 0; x < bounds.size.x; x++)

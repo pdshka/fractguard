@@ -28,6 +28,43 @@ public static class HelperUtilities
     }
 
     /// <summary>
+    /// Get AimDirection enum value from the passed in angleDegrees
+    /// </summary>
+    public static LookDirection GetLookDirection(float angleDegrees)
+    {
+        LookDirection lookDirection;
+
+        // Set player direction
+        // Up
+        if (angleDegrees > 22f && angleDegrees <= 158f)
+        {
+            lookDirection = LookDirection.Up;
+        }
+        // Left
+        else if ((angleDegrees <= 180f && angleDegrees > 158f) || (angleDegrees >= -180 && angleDegrees < -135f))
+        {
+            lookDirection = LookDirection.Left;
+        }
+        // Down
+        else if ((angleDegrees >= -135f && angleDegrees <= -45f))
+        {
+            lookDirection = LookDirection.Down;
+        }
+        // Right
+        else if ((angleDegrees > -45f && angleDegrees <= 0f) || (angleDegrees > 0 && angleDegrees <= 22f))
+        {
+            lookDirection = LookDirection.Right;
+        }
+        else
+        {
+            lookDirection = LookDirection.Right;
+        }
+
+        return lookDirection;
+
+    }
+
+    /// <summary>
     /// Get the camera viewport lower and upper bounds
     /// </summary>
     public static void CameraWorldPositionBounds(out Vector2Int cameraWorldPositionLowerBounds, out Vector2Int cameraWorldPositionUpperBounds, Camera camera)

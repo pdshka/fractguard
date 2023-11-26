@@ -1,34 +1,68 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
-    [SerializeField] private List<ArmyPatternSO> armyPatterns = new List<ArmyPatternSO>();
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<GameObject> armyPatterns = new List<GameObject>();
 
-    private int currentEnemyCount;
-    private int enemiesSpawnedSoFar;
+    [SerializeField] private BaseGenerator baseGeneratorReference;
+    [SerializeField] private TextMeshProUGUI wavesText;
+    [HideInInspector] public int currentEnemyCount;
+    [HideInInspector] public int enemiesSpawnedSoFar;
+    [SerializeField] private int armyPatternChangeFrequency = 3;
+    [SerializeField] private int enemyBoostFrequency = 2;
+    [SerializeField] private int castleExpandFrequency = 5;
+    [SerializeField] private int wavesCooldown = 30;
+    private int wavesCooldownTimer;
+
+    private int currentWaveNumber = 0;
+    
+    private GameObject currentArmyPattern;
 
     private void Start()
     {
-        LaunchNextWave();
+        currentArmyPattern = ChooseRandomFractalPattern();
+        StartCoroutine(LaunchNextWaveAfterCooldown());
     }
 
-    private ArmyPatternSO ChooseRandomFractalPattern()
+    // возвращает другой рандомный фрактал
+    private GameObject ChooseRandomFractalPattern()
     {
         int index = Random.Range(0, armyPatterns.Count - 1);
+
+        while (armyPatterns[index] == currentArmyPattern)
+        {
+            index = Random.Range(0, armyPatterns.Count - 1);
+        }
 
         return armyPatterns[index];
     }
 
     private void LaunchNextWave()
     {
-        ArmyPatternSO armyPattern = ChooseRandomFractalPattern();
-        foreach (var position in armyPattern.positions)
+        currentWaveNumber++;
+        wavesText.text = "Волна " + currentWaveNumber;
+        //Debug.Log(currentWaveNumber);
+        if (currentWaveNumber % armyPatternChangeFrequency == 1 && currentWaveNumber > 1)
         {
-            CreateEnemy(enemyPrefab, position);
+            currentArmyPattern = ChooseRandomFractalPattern();
         }
-        // currentEnemyCount += ...
+        if (currentWaveNumber % enemyBoostFrequency == 1 && currentWaveNumber > 1)
+        {
+            /*foreach (SplineInstantiate.InstantiableItem enemy in currentArmyPattern.GetComponent<SplineInstantiate>().itemsToInstantiate)
+            {
+                enemy.Prefab.GetComponent<Enemy>()
+            }*/
+            
+        }
+        if (currentWaveNumber % castleExpandFrequency == 1 && currentWaveNumber > 1)
+        {
+            baseGeneratorReference.RunProceduralGeneration();
+        }
+        Instantiate(currentArmyPattern);
     }
 
 
@@ -60,8 +94,28 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         if (currentEnemyCount <= 0)
         {
-            LaunchNextWave();
+            StartCoroutine(LaunchNextWaveAfterCooldown());
         }
     }
+
+    private void UpdateWaveTimerText()
+    {
+        wavesText.text = string.Format("00:{0:d2}\nдо волны {1:d}", wavesCooldownTimer, currentWaveNumber + 1);
+    }
+
+    private IEnumerator LaunchNextWaveAfterCooldown()
+    {
+        wavesCooldownTimer = wavesCooldown;
+        
+        while (wavesCooldownTimer > 0)
+        {
+            UpdateWaveTimerText();
+            yield return new WaitForSeconds(1f);
+            wavesCooldownTimer--;
+        }
+
+        LaunchNextWave();
+    }
+
 
 }
