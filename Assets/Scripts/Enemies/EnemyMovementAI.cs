@@ -19,8 +19,10 @@ public class EnemyMovementAI : MonoBehaviour
     [HideInInspector] public Vector3 targetPosition;
     [HideInInspector] public bool targetReached = false;
     private const float pathRebuildCooldown = 1f;
+    private const int targetFrameRateToSpreadPathfindingOver = 60;
     private float pathRebuildCooldownTimer;
-    private bool pathRebuildNeeded = false;
+    //private bool pathRebuildNeeded = false;
+    private int updateFrameNumber = 1;
     private PolygonCollider2D enemySightCollider;
 
     private void Awake()
@@ -32,6 +34,7 @@ public class EnemyMovementAI : MonoBehaviour
     private void Start()
     {
         targetPosition = initialTargetPosition;
+        updateFrameNumber = EnemySpawner.Instance.enemiesSpawnedSoFar % targetFrameRateToSpreadPathfindingOver;
     }
 
     private void Update()
@@ -52,7 +55,7 @@ public class EnemyMovementAI : MonoBehaviour
         // Бежим в сторону главной башни
 
         // Если видим заборчик, то бежим к заборчику
-        if (pathRebuildCooldownTimer <= 0f)
+        if (pathRebuildCooldownTimer <= 0f && Time.frameCount % targetFrameRateToSpreadPathfindingOver == updateFrameNumber)
         {
             CheckForNewTarget();
             pathRebuildCooldownTimer = pathRebuildCooldown;
@@ -111,7 +114,7 @@ public class EnemyMovementAI : MonoBehaviour
             foreach (Collider2D obj in filteredObjects)
             {
                 // пропускаем текущий коллайдер
-                if (obj.bounds.Contains(transform.position))
+                if (obj.OverlapPoint(transform.position))
                 {
                     continue;
                 }
