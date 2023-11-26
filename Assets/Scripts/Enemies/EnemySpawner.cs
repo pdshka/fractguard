@@ -9,10 +9,11 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     [SerializeField] private BaseGenerator baseGeneratorReference;
     [HideInInspector] public int currentEnemyCount;
+    [HideInInspector] public int enemiesSpawnedSoFar;
     [SerializeField] private int armyPatternChangeFrequency = 3;
     [SerializeField] private int enemyBoostFrequency = 2;
     [SerializeField] private int castleExpandFrequency = 5;
-    private int enemiesSpawnedSoFar;
+    
     private int currentWaveNumber = 0;
     private float wavesCooldown = 5f;
     private GameObject currentArmyPattern;
