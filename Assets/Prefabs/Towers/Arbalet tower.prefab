@@ -138,7 +138,7 @@ MonoBehaviour:
   stone: 5
   wood: 20
   bulletPrefab: {fileID: 9073073751156754738, guid: 658f77af9be54a948a7c1c491e920002, type: 3}
-  cooldown: 1
+  cooldown: 2
   target: {fileID: 0}
   shootPosition: {fileID: 5243491590678834600}
 --- !u!1 &8482135677092190953
@@ -199,7 +199,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7533807016527777194}
