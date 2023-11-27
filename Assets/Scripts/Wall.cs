@@ -14,12 +14,16 @@ public class Wall : MonoBehaviour
     public Collider2D wallCollider;
     public bool destroyed = false;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip destroy;
+
     private void Awake()
     {
         healthEvent = GetComponent<HealthEvent>();
         health = GetComponent<Health>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         wallCollider = GetComponent<Collider2D>();
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -44,9 +48,11 @@ public class Wall : MonoBehaviour
 
     private void WallDestroyed()
     {
+
         if (tower != null)
         {
             GameObject.Destroy(tower);
+            audioSource.PlayOneShot(destroy, 0.3f);
         }
         spriteRenderer.sprite = wallDestroyed;
         wallCollider.isTrigger = true;

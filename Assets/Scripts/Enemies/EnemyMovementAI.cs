@@ -30,6 +30,7 @@ public class EnemyMovementAI : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         enemySightCollider = GetComponentInChildren<PolygonCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()

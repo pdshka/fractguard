@@ -240,6 +240,9 @@ MonoBehaviour:
   enemyAttackAI: {fileID: 0}
   rigidBody2D: {fileID: 0}
   animator: {fileID: 0}
+  death:
+  - {fileID: 8300000, guid: 28e782c39515c2c428b2737c4f50886e, type: 3}
+  - {fileID: 8300000, guid: ff552c85f1ed9aa4589f26a3394b1296, type: 3}
 --- !u!114 &-6393621387196747361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +366,8 @@ MonoBehaviour:
   attackCheck: {fileID: 81753043}
   attackCheckRadius: 0.2
   enemyDamage: 5
+  bite: {fileID: 8300000, guid: 4f2f363f0a34af14693b55bb61c4dae5, type: 3}
+  volume: 0.3
 --- !u!82 &5785902051004168003
 AudioSource:
   m_ObjectHideFlags: 0

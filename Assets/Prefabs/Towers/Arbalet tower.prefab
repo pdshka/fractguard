@@ -142,6 +142,7 @@ MonoBehaviour:
   target: {fileID: 0}
   shootPosition: {fileID: 5243491590678834600}
   shoot: {fileID: 8300000, guid: ac86184727bec704185d1fe368734278, type: 3}
+  build: {fileID: 8300000, guid: e555882742c59e142bfc1434a78406c2, type: 3}
   volume: 0.5
 --- !u!1 &8482135677092190953
 GameObject:

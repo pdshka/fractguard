@@ -24,14 +24,20 @@ public class Tower : MonoBehaviour
 
     [Header("Sound settings")]
     [SerializeField] private AudioClip shoot;
+    [SerializeField] private AudioClip build;
     [SerializeField] private float volume;
+
+    private void Awake()
+    {
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(build, 0.5f);
+    }
 
     private void Start()
     {
         timer = 0f;
         target = null;
         enemyQueue = new Queue<GameObject>();
-        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
     }
 
     private void Update()
