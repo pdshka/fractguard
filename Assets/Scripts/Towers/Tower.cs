@@ -20,11 +20,18 @@ public class Tower : MonoBehaviour
 
     private Queue<GameObject> enemyQueue;
 
+    private AudioSource audioSource;
+
+    [Header("Sound settings")]
+    [SerializeField] private AudioClip shoot;
+    [SerializeField] private float volume;
+
     private void Start()
     {
         timer = 0f;
         target = null;
         enemyQueue = new Queue<GameObject>();
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -56,6 +63,7 @@ public class Tower : MonoBehaviour
         if (timer <= 0f)
         {
             Instantiate(bulletPrefab, shootPosition.position, transform.rotation);
+            audioSource.PlayOneShot(shoot, volume);
             timer = cooldown;
         }
     }

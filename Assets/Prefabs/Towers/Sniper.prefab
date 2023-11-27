@@ -53,6 +53,8 @@ MonoBehaviour:
   cooldown: 5
   target: {fileID: 0}
   shootPosition: {fileID: 5938763858858420730}
+  shoot: {fileID: 8300000, guid: 003240cc48d57014e9c4c5ecdcff4db6, type: 3}
+  volume: 0.5
 --- !u!58 &6615599129567414234
 CircleCollider2D:
   m_ObjectHideFlags: 0
