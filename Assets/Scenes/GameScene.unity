@@ -698,8 +698,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2455833503051622806, guid: 89efb684f36ea1a4e9562a230090d65c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2455833503051622806, guid: 89efb684f36ea1a4e9562a230090d65c, type: 3}
+      propertyPath: wavesText
+      value: 
+      objectReference: {fileID: 975302193}
     - target: {fileID: 2455833503051622806, guid: 89efb684f36ea1a4e9562a230090d65c, type: 3}
       propertyPath: baseGeneratorReference
       value: 
@@ -858,6 +862,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0df34818086b944afef651ea054c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &975302193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8859952898557993859, guid: 0e41d28127511294b8d7189aab0d11aa, type: 3}
+  m_PrefabInstance: {fileID: 693146555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1242874154 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1817585646272839149, guid: 3e3e223926b537e4fb0d9435f9bc9398, type: 3}
@@ -996,6 +1011,10 @@ PrefabInstance:
     - target: {fileID: 7626202682854364539, guid: 9cf77674fe42398469acdfc2d5a194c3, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626202682854364539, guid: 9cf77674fe42398469acdfc2d5a194c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
