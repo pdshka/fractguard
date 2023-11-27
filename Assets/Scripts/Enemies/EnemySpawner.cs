@@ -89,6 +89,11 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     }
 
+    public void SubscribeOnDestroyedEvent(DestroyedEvent destroyedEvent)
+    {
+        destroyedEvent.OnDestroyed += Enemy_OnDestroyed;
+    }
+
     /// <summary>
     /// Process enemy destroyed
     /// </summary>
@@ -99,6 +104,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         // reduce current enemy count
         currentEnemyCount--;
+
+        Debug.Log(currentEnemyCount);
 
         if (currentEnemyCount <= 0)
         {
