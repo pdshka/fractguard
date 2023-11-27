@@ -5,6 +5,10 @@ using TMPro;
 
 public class ResourceManager : MonoBehaviour
 {
+    [Header("Initial resources")]
+    [SerializeField] private int initialMoney = 300;
+    [SerializeField] private int initialStone = 200;
+    [SerializeField] private int initialWood = 200;
     [Header("UI text fields")]
     [SerializeField]
     private TMP_Text moneyAmount;
@@ -17,9 +21,9 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
-        resources["money"] = 100;
-        resources["wood"] = 100;
-        resources["stone"] = 100;
+        resources["money"] = initialMoney;
+        resources["stone"] = initialStone;
+        resources["wood"] = initialWood;
     }
 
     private void Update()
