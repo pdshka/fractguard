@@ -61,3 +61,4 @@ MonoBehaviour:
   enemyBoostFrequency: 2
   castleExpandFrequency: 2
   wavesCooldown: 30
+  resourceManager: {fileID: 0}
