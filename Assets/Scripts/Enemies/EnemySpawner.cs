@@ -17,6 +17,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     [SerializeField] private int castleExpandFrequency = 5;
     [SerializeField] private int wavesCooldown = 30;
     private int wavesCooldownTimer;
+    [SerializeField] private ResourceManager resourceManager;
 
     private int currentWaveNumber = 0;
     
@@ -105,7 +106,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         // reduce current enemy count
         currentEnemyCount--;
 
-        Debug.Log(currentEnemyCount);
+        resourceManager.IncreaseResources("money", 10);
 
         if (currentEnemyCount <= 0)
         {
