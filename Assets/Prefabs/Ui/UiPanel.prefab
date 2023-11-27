@@ -2086,7 +2086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03aed6913464df44ea4e4a8f30d6f223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 8026699169945786675, guid: 5ba6a5fd5bfd10f4fba8f101c742d718, type: 3}
+  tower: {fileID: 8826388532666444850, guid: 5ba6a5fd5bfd10f4fba8f101c742d718, type: 3}
   moneyVal: {fileID: 1811705589737146706}
   stoneVal: {fileID: 2575427543389996982}
   woodVal: {fileID: 4034310505301423681}
@@ -5152,7 +5152,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6239481598659565082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3824784594712083428}
+        m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
+        m_MethodName: TryToBuild
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6977065430408882272, guid: b6f3d43c295adb34e9c8b733eca08d01, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3623552576934342092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5160,12 +5172,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7385535603782761949}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03aed6913464df44ea4e4a8f30d6f223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 0}
+  tower: {fileID: 6977065430408882272, guid: b6f3d43c295adb34e9c8b733eca08d01, type: 3}
   moneyVal: {fileID: 5672473444626113639}
   stoneVal: {fileID: 4504968756246336894}
   woodVal: {fileID: 8700231618122940152}

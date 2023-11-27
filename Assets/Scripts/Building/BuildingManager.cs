@@ -130,11 +130,11 @@ public class BuildingManager : MonoBehaviour
 
     public void TryToBuild(GameObject tower)
     {
-        Tower t = tower.GetComponent<Tower>();
+        Tower t = tower.GetComponentInChildren<Tower>();
         if (CheckCost(t.money, t.stone, t.wood))
         {
             customCursor.gameObject.SetActive(true);
-            customCursor.GetComponent<SpriteRenderer>().sprite = t.GetComponent<SpriteRenderer>().sprite;
+            customCursor.GetComponent<SpriteRenderer>().sprite = tower.GetComponent<SpriteRenderer>().sprite;
             currentTower = tower;
         }
     }
@@ -174,7 +174,7 @@ public class BuildingManager : MonoBehaviour
         t.transform.SetParent(w.transform);
         w.GetComponent<Wall>().AttachTower(t);
         //t.GetComponent<SpriteRenderer>().sortingOrder = 1; // TODO: change logic of tower sorting
-        var tow = tower.GetComponent<Tower>();
+        var tow = tower.GetComponentInChildren<Tower>();
         DecreaseResources(tow.money, tow.stone, tow.wood);
         ResetState();
     }
