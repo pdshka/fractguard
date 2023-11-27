@@ -53,7 +53,12 @@ MonoBehaviour:
   - {fileID: 8647492078119189046, guid: 67512f55201ff4c4ca0352ad210d4044, type: 3}
   - {fileID: 8661671354448523286, guid: b8241ad531f4da046b0c50d527da8cdd, type: 3}
   - {fileID: 2610216583485812399, guid: b19cae543193b364a827b83a127b0f19, type: 3}
+  baseGeneratorReference: {fileID: 0}
+  wavesText: {fileID: 0}
   currentEnemyCount: 0
+  enemiesSpawnedSoFar: 0
   armyPatternChangeFrequency: 3
   enemyBoostFrequency: 2
-  castleExpandFrequency: 5
+  castleExpandFrequency: 2
+  wavesCooldown: 30
+  resourceManager: {fileID: 0}

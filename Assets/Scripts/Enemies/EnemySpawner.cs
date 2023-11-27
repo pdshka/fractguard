@@ -17,6 +17,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     [SerializeField] private int castleExpandFrequency = 5;
     [SerializeField] private int wavesCooldown = 30;
     private int wavesCooldownTimer;
+    [SerializeField] private ResourceManager resourceManager;
 
     private int currentWaveNumber = 0;
     
@@ -62,8 +63,6 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         if (currentWaveNumber % castleExpandFrequency == 1 && currentWaveNumber > 1)
         {
             currentArmyPattern.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
-            var splineInst = currentArmyPattern.GetComponent<SplineInstantiate>();
-            splineInst.MinSpacing = splineInst.MaxSpacing -= 0.02f;
             if (currentArmyPattern.name == "WolfHead")
             {
                 currentArmyPattern.transform.position += new Vector3(0f, 1f);
@@ -89,6 +88,11 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     }
 
+    public void SubscribeOnDestroyedEvent(DestroyedEvent destroyedEvent)
+    {
+        destroyedEvent.OnDestroyed += Enemy_OnDestroyed;
+    }
+
     /// <summary>
     /// Process enemy destroyed
     /// </summary>
@@ -99,6 +103,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         // reduce current enemy count
         currentEnemyCount--;
+
+        resourceManager.IncreaseResources("money", 10);
 
         if (currentEnemyCount <= 0)
         {

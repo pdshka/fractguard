@@ -40,7 +40,7 @@ public class Wall : MonoBehaviour
 
     private void HealthEvent_OnHealthLost(HealthEvent healthEvent, HealthEventArgs healthEventArgs)
     {
-        if (healthEventArgs.healthAmount <= 0)
+        if (healthEventArgs.healthAmount <= 0 && !destroyed)
         {
             WallDestroyed();
         }
@@ -57,6 +57,7 @@ public class Wall : MonoBehaviour
         spriteRenderer.sprite = wallDestroyed;
         wallCollider.isTrigger = true;
         destroyed = true;
+        spriteRenderer.sortingOrder -= 1;
     }
 
     public void AttachTower(GameObject tower)
@@ -67,8 +68,9 @@ public class Wall : MonoBehaviour
 
     public void Fix()
     {
+        health.ResetHealth();
         destroyed = false;
         spriteRenderer.sprite = wallFixed;
-        health.ResetHealth();
+        spriteRenderer.sortingOrder += 1;
     }
 }
