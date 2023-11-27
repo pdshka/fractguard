@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     {
         EnemySpawner.Instance.currentEnemyCount++;
         EnemySpawner.Instance.enemiesSpawnedSoFar++;
+        EnemySpawner.Instance.SubscribeOnDestroyedEvent(GetComponent<DestroyedEvent>());
     }
 
     /// <summary>
