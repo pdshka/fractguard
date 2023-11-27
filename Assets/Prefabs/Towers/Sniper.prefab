@@ -50,7 +50,7 @@ MonoBehaviour:
   stone: 70
   wood: 0
   bulletPrefab: {fileID: 5567106963298944675, guid: 3e201ea2c1a0a534daaebdd1eb345651, type: 3}
-  cooldown: 10
+  cooldown: 5
   target: {fileID: 0}
   shootPosition: {fileID: 5938763858858420730}
 --- !u!58 &6615599129567414234
