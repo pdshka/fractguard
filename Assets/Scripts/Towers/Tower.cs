@@ -56,9 +56,12 @@ public class Tower : MonoBehaviour
 
     private void Aim()
     {
-        float distX = target.transform.position.x - transform.position.x;
-        float distY = target.transform.position.y - transform.position.y;
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg);
+        if (target != null)
+        {
+            float distX = target.transform.position.x - transform.position.x;
+            float distY = target.transform.position.y - transform.position.y;
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(distY, distX) * Mathf.Rad2Deg);
+        }
     }
 
     private void Shoot()
