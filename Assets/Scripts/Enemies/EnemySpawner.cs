@@ -104,7 +104,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         // reduce current enemy count
         currentEnemyCount--;
 
-        resourceManager.IncreaseResources("money", 10);
+        resourceManager.IncreaseResources("money", 3);
 
         if (currentEnemyCount <= 0)
         {
