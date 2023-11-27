@@ -7,7 +7,7 @@ using TMPro;
 public class TowerDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Tower tower;
+    private GameObject tower;
     [SerializeField]
     private TMP_Text moneyVal;
     [SerializeField]
@@ -17,8 +17,9 @@ public class TowerDisplay : MonoBehaviour
 
     private void Start()
     {
-        moneyVal.text = tower.money.ToString();
-        stoneVal.text = tower.stone.ToString();
-        woodVal.text = tower.wood.ToString();
+        Tower t = tower.GetComponentInChildren<Tower>();
+        moneyVal.text = t.money.ToString();
+        stoneVal.text = t.stone.ToString();
+        woodVal.text = t.wood.ToString();
     }
 }
