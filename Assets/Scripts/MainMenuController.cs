@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
 {
     public string sceneName;
     public GameObject settingsPanel;
+    public string gameSceneName;
     
     public void NewGamePressed()
     {
@@ -17,7 +18,7 @@ public class MainMenuController : MonoBehaviour
     public void ContinuePressed()
     {
         Debug.Log("Continue pressed.");
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(gameSceneName);
     }
 
     public void SettingsPressed()

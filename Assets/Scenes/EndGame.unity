@@ -738,6 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: GameScene
   settingsPanel: {fileID: 0}
+  gameSceneName: GameScene
 --- !u!1 &790841948
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 657131145}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: NewGamePressed
+        m_MethodName: ContinuePressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
