@@ -365,7 +365,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCheck: {fileID: 81753043}
   attackCheckRadius: 0.2
-  enemyDamage: 5
   bite: {fileID: 8300000, guid: 4f2f363f0a34af14693b55bb61c4dae5, type: 3}
   volume: 0.3
 --- !u!82 &5785902051004168003
@@ -464,6 +463,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  enemyDamage: 1
+  attackCooldown: 2
 --- !u!1001 &1206899825849272596
 PrefabInstance:
   m_ObjectHideFlags: 0
