@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     private PolygonCollider2D polygonCollider2D;
     [HideInInspector] public Animator animator;
-
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] death;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         animator = GetComponent<Animator>();
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -76,9 +78,10 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void EnemyDestroyed()
     {
+        if (System.Convert.ToInt32(Random.Range(1, 15)) % 3 == 0)
+            audioSource.PlayOneShot(death[System.Convert.ToInt32(Random.Range(0, death.Length))], 0.3f);
         DestroyedEvent destroyedEvent = GetComponent<DestroyedEvent>();
         destroyedEvent.CallDestroyedEvent(awardForDefeating);
-
     }
 
     /// <summary>

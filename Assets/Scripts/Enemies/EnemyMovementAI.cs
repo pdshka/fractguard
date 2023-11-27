@@ -24,11 +24,13 @@ public class EnemyMovementAI : MonoBehaviour
     //private bool pathRebuildNeeded = false;
     private int updateFrameNumber = 1;
     private PolygonCollider2D enemySightCollider;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
         enemySightCollider = GetComponentInChildren<PolygonCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -66,6 +68,7 @@ public class EnemyMovementAI : MonoBehaviour
             // Idle();
             targetReached = true;
             enemy.animator.SetBool("isMoving", false);
+            audioSource.Stop();
             return;
         }
         targetReached = false;
@@ -76,6 +79,8 @@ public class EnemyMovementAI : MonoBehaviour
         enemy.rigidBody2D.MovePosition(enemy.rigidBody2D.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
 
         enemy.animator.SetBool("isMoving", true);
+        if (!audioSource.isPlaying)
+            audioSource.Play();
 
         // передаем инфу аниматору и другим ... 
         InitializeLookAnimationParameters();

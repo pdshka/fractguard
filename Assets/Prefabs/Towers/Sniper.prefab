@@ -50,9 +50,12 @@ MonoBehaviour:
   stone: 70
   wood: 0
   bulletPrefab: {fileID: 5567106963298944675, guid: 3e201ea2c1a0a534daaebdd1eb345651, type: 3}
-  cooldown: 10
+  cooldown: 5
   target: {fileID: 0}
   shootPosition: {fileID: 5938763858858420730}
+  shoot: {fileID: 8300000, guid: 003240cc48d57014e9c4c5ecdcff4db6, type: 3}
+  build: {fileID: 8300000, guid: e555882742c59e142bfc1434a78406c2, type: 3}
+  volume: 0.5
 --- !u!58 &6615599129567414234
 CircleCollider2D:
   m_ObjectHideFlags: 0

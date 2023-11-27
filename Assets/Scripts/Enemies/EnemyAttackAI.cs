@@ -9,9 +9,14 @@ public class EnemyAttackAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f;
     private float attackCooldownTimer = 0f;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip bite;
+    [SerializeField] private float volume;
+
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -43,6 +48,7 @@ public class EnemyAttackAI : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(enemyDamage);
+                audioSource.PlayOneShot(bite, volume);
             }
         }
     }

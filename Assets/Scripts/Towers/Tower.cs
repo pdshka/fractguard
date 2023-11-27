@@ -20,6 +20,19 @@ public class Tower : MonoBehaviour
 
     private Queue<GameObject> enemyQueue;
 
+    private AudioSource audioSource;
+
+    [Header("Sound settings")]
+    [SerializeField] private AudioClip shoot;
+    [SerializeField] private AudioClip build;
+    [SerializeField] private float volume;
+
+    private void Awake()
+    {
+        audioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(build, 0.5f);
+    }
+
     private void Start()
     {
         timer = 0f;
@@ -31,19 +44,14 @@ public class Tower : MonoBehaviour
     {
         if (timer > 0f)
             timer -= Time.deltaTime;
-        if (target != null)
+        if (enemyQueue.Count > 0 || target != null)
             Shoot();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
-        {
-            if (enemyQueue.Count == 0)
-                target = collision.gameObject;
-            else
-                enemyQueue.Enqueue(collision.gameObject);
-        }
+            enemyQueue.Enqueue(collision.gameObject);
     }
 
     private void Aim()
@@ -57,10 +65,11 @@ public class Tower : MonoBehaviour
     {
         if (target == null && enemyQueue.Count > 0)
             target = enemyQueue.Dequeue();
-        if (target != null) Aim();
+        Aim();
         if (timer <= 0f)
         {
             Instantiate(bulletPrefab, shootPosition.position, transform.rotation);
+            audioSource.PlayOneShot(shoot, volume);
             timer = cooldown;
         }
     }
