@@ -50,6 +50,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         {
             currentArmyPattern = ChooseRandomFractalPattern();
         }
+
         if (currentWaveNumber % enemyBoostFrequency == 1 && currentWaveNumber > 1)
         {
             /*foreach (SplineInstantiate.InstantiableItem enemy in currentArmyPattern.GetComponent<SplineInstantiate>().itemsToInstantiate)
@@ -60,6 +61,13 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         }
         if (currentWaveNumber % castleExpandFrequency == 1 && currentWaveNumber > 1)
         {
+            currentArmyPattern.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+            var splineInst = currentArmyPattern.GetComponent<SplineInstantiate>();
+            splineInst.MinSpacing = splineInst.MaxSpacing -= 0.02f;
+            if (currentArmyPattern.name == "WolfHead")
+            {
+                currentArmyPattern.transform.position += new Vector3(0f, 1f);
+            }
             baseGeneratorReference.RunProceduralGeneration();
         }
         Instantiate(currentArmyPattern);

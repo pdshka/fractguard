@@ -361,7 +361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCheck: {fileID: 81753043}
   attackCheckRadius: 0.2
-  enemyDamage: 5
+  enemyDamage: 1
+  attackCooldown: 2
 --- !u!1001 &1206899825849272596
 PrefabInstance:
   m_ObjectHideFlags: 0

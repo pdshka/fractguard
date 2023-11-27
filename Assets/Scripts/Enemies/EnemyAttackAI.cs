@@ -6,7 +6,7 @@ public class EnemyAttackAI : MonoBehaviour
     [SerializeField] private float attackCheckRadius;
     [SerializeField] private int enemyDamage;
     private Enemy enemy;
-    private const float attackCooldown = 1f;
+    [SerializeField] private float attackCooldown = 1f;
     private float attackCooldownTimer = 0f;
 
     private void Awake()
