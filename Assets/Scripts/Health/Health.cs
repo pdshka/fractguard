@@ -154,4 +154,13 @@ public class Health : MonoBehaviour
         CallHealthEvent(0);
     }
 
+    /// <summary>
+    /// Reset health to initial value
+    /// </summary>
+    public void ResetHealth()
+    {
+        currentHealth = initialHealth;
+    }
+
+    public int GetInitialHealth() => initialHealth;
 }

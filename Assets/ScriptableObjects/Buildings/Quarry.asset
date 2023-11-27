@@ -16,4 +16,6 @@ MonoBehaviour:
   resource: {fileID: 11400000, guid: a99c300b1afc0ad45a7c934987e6c436, type: 2}
   resourceIncrease: 2
   timeBetweenIncreases: 10
-  cost: 20
+  money: 30
+  stone: 0
+  wood: 0

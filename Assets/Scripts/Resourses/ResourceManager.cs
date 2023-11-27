@@ -17,9 +17,9 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
-        resources["money"] = 9999;
-        resources["wood"] = 0;
-        resources["stone"] = 0;
+        resources["money"] = 100;
+        resources["wood"] = 100;
+        resources["stone"] = 100;
     }
 
     private void Update()

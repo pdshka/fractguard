@@ -13,25 +13,33 @@ public class EnemyMovementAI : MonoBehaviour
     public float moveSpeed = 8f;
     private Enemy enemy;
     [SerializeField] private float enemySightRadius = 5f;
+    [SerializeField] private float enemySightAngle;
     private readonly Vector3 initialTargetPosition = Vector3.zero;
+    private Vector3 previousTargetPosition;
     [HideInInspector] public Vector3 targetPosition;
     [HideInInspector] public bool targetReached = false;
-    private const float pathRebuildCooldown = 2f;
+    private const float pathRebuildCooldown = 1f;
+    private const int targetFrameRateToSpreadPathfindingOver = 60;
     private float pathRebuildCooldownTimer;
-    private bool pathRebuildNeeded = false;
+    //private bool pathRebuildNeeded = false;
+    private int updateFrameNumber = 1;
+    private PolygonCollider2D enemySightCollider;
 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
+        enemySightCollider = GetComponentInChildren<PolygonCollider2D>();
     }
 
     private void Start()
     {
         targetPosition = initialTargetPosition;
+        updateFrameNumber = EnemySpawner.Instance.enemiesSpawnedSoFar % targetFrameRateToSpreadPathfindingOver;
     }
 
     private void Update()
     {
+        //enemySightCollider.transform.right = initialTargetPosition - transform.position;
         if (pathRebuildCooldownTimer > 0f)
         {
             pathRebuildCooldownTimer -= Time.deltaTime;
@@ -47,7 +55,7 @@ public class EnemyMovementAI : MonoBehaviour
         // Бежим в сторону главной башни
 
         // Если видим заборчик, то бежим к заборчику
-        if (pathRebuildCooldownTimer <= 0f)
+        if (pathRebuildCooldownTimer <= 0f && Time.frameCount % targetFrameRateToSpreadPathfindingOver == updateFrameNumber)
         {
             CheckForNewTarget();
             pathRebuildCooldownTimer = pathRebuildCooldown;
@@ -57,6 +65,7 @@ public class EnemyMovementAI : MonoBehaviour
         {
             // Idle();
             targetReached = true;
+            enemy.animator.SetBool("isMoving", false);
             return;
         }
         targetReached = false;
@@ -65,6 +74,8 @@ public class EnemyMovementAI : MonoBehaviour
         Vector2 unitVector = Vector3.Normalize(movePosition - transform.position);
 
         enemy.rigidBody2D.MovePosition(enemy.rigidBody2D.position + (unitVector * moveSpeed * Time.fixedDeltaTime));
+
+        enemy.animator.SetBool("isMoving", true);
 
         // передаем инфу аниматору и другим ... 
         InitializeLookAnimationParameters();
@@ -78,18 +89,43 @@ public class EnemyMovementAI : MonoBehaviour
     {
         Collider2D[] objectsInLineOfSight = Physics2D.OverlapCircleAll(transform.position, enemySightRadius, targetsLayerMask);
 
-        if (objectsInLineOfSight.Length > 0)
+        List<Collider2D> filteredObjects = new List<Collider2D>();
+
+        foreach (Collider2D obj in objectsInLineOfSight)
         {
-            Collider2D closestCollider = null;
-            float minDistance = float.MaxValue;
-            foreach (Collider2D obj in objectsInLineOfSight)
+            Vector3 directionToTarget = (obj.transform.position - transform.position).normalized;
+            float angle = Vector2.Angle(-transform.position, directionToTarget);
+            if ((angle <= enemySightAngle / 2 || 360f - angle <= enemySightAngle / 2))
             {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, obj.transform.position - transform.position, enemySightRadius, targetsLayerMask);
+                
+                if (!obj.isTrigger && hits.FirstOrDefault(hit => !hit.collider.isTrigger).collider == obj 
+                    || hits.TakeWhile(hit => hit.collider.isTrigger).Any(hit => hit.collider == obj))
+                {
+                    filteredObjects.Add(obj);
+                }
+            }
+        }
+        Collider2D closestCollider = null;
+        if (filteredObjects.Count > 0)
+        {
+            
+            float minDistance = float.MaxValue;
+            foreach (Collider2D obj in filteredObjects)
+            {
+                // пропускаем текущий коллайдер
+                if (obj.OverlapPoint(transform.position))
+                {
+                    continue;
+                }
+                // Главное здание
                 if (obj.gameObject.tag == "MainBuilding")
                 {
                     closestCollider = obj;
                     break;
                 }
                 
+                // Приоритет для пробитых стен
                 float destroyedPriorityContribution = 0f;
                 if (obj.isTrigger)
                 {
@@ -104,6 +140,13 @@ public class EnemyMovementAI : MonoBehaviour
                     closestCollider = obj;
                 }
             }
+        }
+        if (closestCollider == null)
+        {
+            targetPosition = initialTargetPosition;
+        }
+        else
+        {
             targetPosition = closestCollider.isTrigger ? closestCollider.transform.position : closestCollider.ClosestPoint(transform.position);
         }
     }
@@ -144,6 +187,13 @@ public class EnemyMovementAI : MonoBehaviour
                 break;
 
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(targetPosition, 0.1f);
+        Gizmos.DrawWireSphere(transform.position, enemySightRadius);
+        // Gizmos.DrawLine(HelperUtilities.GetDirectionVectorFromAngle(enemySightAngle / 2) + transform.position, transform.position);
     }
 
     private void Idle()
